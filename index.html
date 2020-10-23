@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset='utf-8'>
+  <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+  <title>Interpolacja </title>
+  <meta name='viewport' content='width=device-width, initial-scale=1'>
+  <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>Dwutlenek węgla</h1>
+    </header>
+
+    <section>
+      <canvas id="canvas"></canvas>
+    </section>
+
+    <section>
+      <h2 id="formula">2x<sup>2</sup> + 5x - 10</h2>
+    </section>
+
+    <section>
+      <header class="data-group">
+        <h4>Rok pomiaru</h4>
+        <h4>Przyrost CO<sub>2</sub> <span class="unit">[t]</span></h4>
+        <div class="button-container">
+          <button onClick="">Nowy</button>
+          <button onClick="">Importuj</button>
+          <button onClick="">Wyczyść</button>
+        </div>
+      </header>
+
+      <div id="inputList">
+        <div class="data-group">
+          <input type="number" step="1" placeholder="Rok">
+          <input type="number" placeholder="Przyrost">
+          <button class="remove-button" onClick="">x</button>
+        </div>
+        <div class="data-group">
+          <input type="number" step="1" placeholder="Rok">
+          <input type="number" placeholder="Przyrost">
+          <button class="remove-button" onClick="">x</button>
+        </div>
+        <div class="data-group">
+          <input type="number" step="1" placeholder="Rok">
+          <input type="number" placeholder="Przyrost">
+          <button class="remove-button" onClick="">x</button>
+        </div>
+        <div class="data-group">
+          <input type="number" step="1" placeholder="Rok">
+          <input type="number" placeholder="Przyrost">
+          <button class="remove-button" onClick="">x</button>
+        </div>
+      </div>
+    </section>
+
+  </main>
+</body>
+<script src='main.js'></script>
+</html>
