@@ -32,7 +32,27 @@ const view = new class {
     this.spawnInput();
   }
 
+  printFormula(polynomial) {
+    const formatCoef = (coef) =>
+      (coef > 0) ? ` + ${coef}` : ` - ${-coef}`
+
+    const formatPower = (power) =>
+      (power !== 0) ? `x<sup>${power}</sup>` : ''
+
+    const format = (coef, power) =>
+      (coef !== 0) ? formatCoef(coef) + formatPower(power) : ''
+
+    let monomials = polynomial
+      .map((coef, power) => format(coef, power))
+      .reverse()
+
+    this.formula.innerHTML = monomials
+      .reduce((acc, monomial) => acc + monomial)
+  }
+
   // TODO: Implement
   // https://developer.mozilla.org/en-US/docs/Web/API/File/Using_files_from_web_applications
   importData() { }
 }()
+
+view.printFormula([-5, 0, 10, 2])
