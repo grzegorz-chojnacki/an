@@ -18,9 +18,11 @@ const view = new class {
     this.inputList.prepend(newInput)
   }
 
-  removeInput(element) {
-    const container = element.parentNode
+  removeInput(removeButton) {
+    const container = removeButton.parentNode
     container.parentNode.removeChild(container)
+
+    if (this.inputList.childElementCount === 0) { this.spawnInput() }
   }
 
   removeAllInputs() {
@@ -30,5 +32,7 @@ const view = new class {
     this.spawnInput();
   }
 
+  // TODO: Implement
+  // https://developer.mozilla.org/en-US/docs/Web/API/File/Using_files_from_web_applications
   importData() { }
 }()
