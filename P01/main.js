@@ -12,15 +12,25 @@ const view = new class {
     </div>`
 
   spawnInput() {
-    this.inputList.insertAdjacentHTML('beforebegin', this.dataItemTemplate)
+    const newInput = new DOMParser()
+      .parseFromString(this.dataItemTemplate, 'text/html').body.firstChild
+
+    this.inputList.prepend(newInput)
+  }
+
+  removeInput(element) {
+    const container = element.parentNode
+    container.parentNode.removeChild(container)
+  }
+
+  removeAllInputs() {
+    const inputs = [...this.inputList.childNodes]
+    inputs.forEach(node => this.inputList.removeChild(node))
+
+    this.spawnInput();
   }
 
   importData() { }
-  removeInput(element) {
-    let container = element.parentNode
-    container.parentNode.removeChild(container)
-  }
-  removeAllInputs() { }
 }()
 
 view.spawnInput();
