@@ -1,0 +1,35 @@
+\documentclass[12pt]{article}
+\usepackage{polski}
+\usepackage{lmodern}
+\usepackage[utf8]{inputenc}
+\usepackage{tabto}
+\usepackage{indentfirst} %pierwszy akapit posiada wcięcie
+\title{Interpolacja wielomianowa - projekt}
+\author{Natalia Wojtania i Grzegorz Chojnacki}
+%\date{}
+\begin{document}
+\maketitle
+
+\section{Zadanie}
+\subsection{Tytuł}
+Tytuł zadania to "Dwutlenek węgla".
+\subsection{Treść}
+Program,  który  oszacuje  tempo  przyrostu dwutlenku węgla w atmosferze Ziemi. Węzły mają  przedstawiać  ilość  wyemitowanego  do atmosfery $ CO_{2}$ w  ciągu  roku  lub  w  innym przedziale czasowym.
+\subsection{Metoda}
+W programie należy wykorzystać metodę Newtona.
+\subsubsection{Opis metody}
+Mając zadany układ punktów $\{(x_{j},y_{j}),j=0,1,2,3...,n\}$, gdzie $x_{0},x_{1},x_{2},...,x_{n}$ są węzłami interpolacyjnymi, a $y_{0},y_{1},...,y_{n}$ wartościami, poszukujemy wielomianu interpolacyjnego $P \in \sqcap_{n}$ spełniającego warunki $P(x_{i})=y_{i}, i=0,1,2,...,n$ w postaci :
+$$ P(x)=b_{0}+b_{1}(x-x_{0})+b_{2}(x-x_{0})(x-x_{1})+...+b_{n}(x-x_{0})\cdot...\cdot(x-x_{n-1}).$$
+Z wyżej wymienionych warunków otrzymamy układ z niewiadomymi $b_{0},b_{1},...,b_{n}.$ 
+Z pierwszego równania $P(x_{0})=y_{0}=b_{0}$, następnie $P(x_{1})=y_{1}=b_{0}+b_{1}(x-x_{0})$, stąd $b_{1}=\frac{y_{1}-y_{0}}{x_{1}-x_{0}}$ itd.
+\subsubsection{Przykład}
+\begin{tabular}{c|c|c|c}
+$x_{i}$&0&2&3 \\ \hline
+$y_{i}$&1&11&19
+\end{tabular}
+\hspace{10mm} $ P(x)=b_{0}+b_{1}(x-0)+b_{2}(x-0)(x-2)$
+\\ \\
+Z warunku $P(0)=1$ mamy $ b_{0}=1,$ z $P(2)=11$ mamy $b_{1}=5,$ z $ P(3)=19 $ mamy $ b_{2}=1.$
+\\Stąd $P(x)=1+5(x-0)+1(x-0)(x-2)=x^{2}+3x+1.$
+\section{}
+\end{document}
