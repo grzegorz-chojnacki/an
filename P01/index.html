@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset='utf-8'>
+  <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+  <title>Interpolacja</title>
+  <meta name='viewport' content='width=device-width, initial-scale=1'>
+  <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+</head>
+<body onload="view.spawnInput()">
+  <main>
+    <header>
+      <h1>Dwutlenek węgla</h1>
+    </header>
+
+    <section>
+      <canvas id="canvas"></canvas>
+    </section>
+
+    <section>
+      <h2 id="formula"></h2>
+    </section>
+
+    <section>
+      <header class="data-group">
+        <h4>Rok pomiaru</h4>
+        <h4>Przyrost CO<sub>2</sub> <span class="unit">[t]</span></h4>
+        <button onclick="view.spawnInput()">Nowy</button>
+        <button onclick="view.removeAllInputs()">Wyczyść wszystko</button>
+        <!-- <button onclick="view.importData()">Importuj</button> -->
+        <!-- Hidden file input opens system file dialog -->
+        <!-- <input type="file" id="file-input" hidden> -->
+      </header>
+
+      <div id="inputList"></div>
+    </section>
+
+  </main>
+</body>
+<script src='main.js'></script>
+</html>

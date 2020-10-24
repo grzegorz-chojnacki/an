@@ -24,25 +24,28 @@ span.unit { letter-spacing: 0.2em; }
 
 .data-group {
   width: 100%;
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  column-gap: 1em;
-}
-
-.button-container {
   display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 0.5rem;
   align-items: center;
-  justify-content: center;
-}
-.button-container > button {
-  display: block;
-  padding: 0.4em 0.6em;
-  margin: 0.5em;
+  justify-content: flex-start;
 }
 
-
-.data-group { margin-bottom: 1em; }
+.data-group > h4 { margin: 1em 0 0.5em }
 .data-group > input { padding: 0.3em; }
+
+.data-group > h4, .data-group > input {
+  min-width: 200px;
+  box-sizing: border-box;
+  margin-right: 0.5rem;
+}
+
+button {
+  display: block;
+  flex-grow: 0;
+  padding: 0.3em 0.6em;
+  margin-right: 0.5rem;
+}
 
 .remove-button {
   align-self: center;
