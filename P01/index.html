@@ -25,28 +25,31 @@
       <header class="data-group">
         <h4>Rok pomiaru</h4>
         <h4>Przyrost CO<sub>2</sub> <span class="unit">[t]</span></h4>
-        <button onClick="">Nowy</button>
-        <button onClick="">Importuj</button>
-        <button onClick="">Wyczyść wszystko</button>
+        <button onClick="spawnInput()">Nowy</button>
+        <button onClick="removeAll()">Wyczyść wszystko</button>
+        <button onClick="importData()">Importuj</button>
+        <button onClick="view.spawnInput()">Importuj</button>
+        <!-- Hidden file input opens system file dialog -->
+        <input type="file" id="file-input" hidden>
       </header>
 
       <div id="inputList">
-        <div class="data-group">
+        <div class="data-item data-group">
           <input type="number" step="1" placeholder="Rok">
           <input type="number" placeholder="Przyrost">
           <button class="remove-button" onClick="">x</button>
         </div>
-        <div class="data-group">
+        <div class="data-item data-group">
           <input type="number" step="1" placeholder="Rok">
           <input type="number" placeholder="Przyrost">
           <button class="remove-button" onClick="">x</button>
         </div>
-        <div class="data-group">
+        <div class="data-item data-group">
           <input type="number" step="1" placeholder="Rok">
           <input type="number" placeholder="Przyrost">
           <button class="remove-button" onClick="">x</button>
         </div>
-        <div class="data-group">
+        <div class="data-item data-group">
           <input type="number" step="1" placeholder="Rok">
           <input type="number" placeholder="Przyrost">
           <button class="remove-button" onClick="">x</button>
