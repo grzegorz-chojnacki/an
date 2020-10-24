@@ -33,10 +33,14 @@ const gui = new class {
   }
 
   printFormula(polynomial) {
-    const exponents = /\^(\d+)/gi
+    const exponents = /\^(\d+)/g
+    const pluses = /\+/g
+    const minuses = /\-/g
     const exponentTemplate = '<span class="hidden">^</span><sup>$1</sup>'
     this.formula.innerHTML = polynomial
       .toString()
+      .replaceAll(pluses, '&plus;')
+      .replaceAll(minuses, '&minus;')
       .replaceAll(exponents, exponentTemplate)
   }
 
@@ -44,12 +48,15 @@ const gui = new class {
   // https://developer.mozilla.org/en-US/docs/Web/API/File/Using_files_from_web_applications
   importData() { }
   // TODO: Implement function to draw polynomial on canvas
-  printFunction(polynomial) {}
+  printFunction(polynomial) { }
 }()
 
 class Polynomial {
   terms = []
-  constructor(terms) { this.terms = terms }
+  constructor(terms) {
+    if (terms.length === 0) throw new Error('Term list is empty')
+    this.terms = terms
+  }
 
   toString() {
     const fullSign    = n => n >= 0 ? ' + ' : ' - '
