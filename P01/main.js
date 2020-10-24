@@ -32,5 +32,3 @@ const view = new class {
 
   importData() { }
 }()
-
-view.spawnInput();
