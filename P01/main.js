@@ -6,9 +6,9 @@ const view = new class {
   inputList = document.getElementById('inputList')
   dataItemTemplate = `
     <div class="data-item data-group">
-      <input type="number" step="1" placeholder="Rok">
-      <input type="number" placeholder="Przyrost">
-      <button class="remove-button" onClick="">x</button>
+      <input type="number" name="year" step="1" placeholder="Rok">
+      <input type="number" name="delta" placeholder="Przyrost">
+      <button class="remove-button" onClick="view.removeInput(this)">x</button>
     </div>`
 
   spawnInput() {
@@ -16,5 +16,11 @@ const view = new class {
   }
 
   importData() { }
-  removeAll() { }
+  removeInput(element) {
+    let container = element.parentNode
+    container.parentNode.removeChild(container)
+  }
+  removeAllInputs() { }
 }()
+
+view.spawnInput();
