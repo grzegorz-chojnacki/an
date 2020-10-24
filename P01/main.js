@@ -32,23 +32,22 @@ const view = new class {
     this.spawnInput();
   }
 
-  printFormula(polynomial) {
+  getFormula(polynomial) {
     const fullSign    = (coef) => coef >= 0 ? ' + ' : ' - '
     const minimalSign = (coef) => coef >= 0 ? ''    : '-'
     const simplifyOne = (coef) => Math.abs(coef) === 1 ? '' : coef
-    const saveOne    = (coef) => coef
-    const formatCoef = (coef, signFormat, oneSimplification) =>
+    const saveOne     = (coef) => coef
+
+    const format = (coef, power, signFormat, oneSimplification) => (coef !== 0)
+      ? formatCoef(coef, signFormat, oneSimplification) + formatPower(power)
+      : ''
+
+    const formatCoef  = (coef, signFormat, oneSimplification) =>
       signFormat(coef) + oneSimplification(Math.abs(coef))
 
-    const formatFreeTerm = (coef) => (coef !== 0)
-      ? formatCoef(coef, fullSign, saveOne) : ''
-
+    const formatFreeTerm = (coef) => format(coef, 0, fullSign, saveOne)
     const formatHighestTerm = (coef) =>
-      formatCoef(coef, minimalSign, simplifyOne)
-      + formatPower(polynomial.length - 1)
-
-    const format = (coef, power) => (coef !== 0)
-      ? formatCoef(coef, fullSign, simplifyOne) + formatPower(power + 1) : ''
+      format(coef, polynomial.length - 1, minimalSign, simplifyOne)
 
     const formatPower = (power) => (power > 1)
       ? `x<sup>${power}</sup>`
@@ -58,13 +57,14 @@ const view = new class {
       const [freeTerm, ...terms] = polynomial
       const highestTerm = terms.pop()
 
-      this.formula.innerHTML =
-        formatHighestTerm(highestTerm) +
-        terms
-          .map(format)
-          .reduce((acc, term) => term + acc, formatFreeTerm(freeTerm))
+      return formatHighestTerm(highestTerm) + terms
+        .map((coef, index) => format(coef, index + 1, fullSign, simplifyOne))
+        .reduce((acc, term) => term + acc, formatFreeTerm(freeTerm))
+    } else return polynomial[0]
+  }
 
-    } else this.formula.innerHTML = polynomial[0]
+  printFormula(polynomial) {
+    this.formula.innerHTML = this.getFormula(polynomial)
   }
 
   // TODO: Implement
@@ -74,6 +74,23 @@ const view = new class {
   printFunction(polynomial) {}
 }()
 
-// TODO: Remove
-// 2x^3 + 10x^2 - 5
-view.printFormula([-1, -2, -2])
+const assert = (result, expected) => {
+  if (result != expected) console.error(`${result} != ${expected}`)
+}
+
+// Formula tests
+assert(view.getFormula([0]), '0')
+assert(view.getFormula([1]), '1')
+assert(view.getFormula([-1]), '-1')
+assert(view.getFormula([0,1]), 'x')
+assert(view.getFormula([0,-1]), '-x')
+assert(view.getFormula([0,2]), '2x')
+assert(view.getFormula([0,-2]), '-2x')
+assert(view.getFormula([1,1]), 'x + 1')
+assert(view.getFormula([1,-4]), '-4x + 1')
+assert(view.getFormula([0,0,1]), 'x<sup>2</sup>')
+assert(view.getFormula([0,0,-1]), '-x<sup>2</sup>')
+assert(view.getFormula([0,0,-8]), '-8x<sup>2</sup>')
+assert(view.getFormula([1,0,1]), 'x<sup>2</sup> + 1')
+assert(view.getFormula([2,-1,2,-2]), '-2x<sup>3</sup> + 2x<sup>2</sup> - x + 2')
+assert(view.getFormula([0,0,0,0,0,4]), '4x<sup>5</sup>')
