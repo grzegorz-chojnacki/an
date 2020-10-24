@@ -83,26 +83,25 @@ class Polynomial {
   }
 }
 
-const assert = (result, expected) => {
-  if (result != expected) console.error(`${result} != ${expected}`)
-}
-
-const newFormula = (terms) => new Polynomial(terms).toString()
-gui.printFormula(new Polynomial([1, 2, 3, 4, 5, -6]))
-
 // Formula tests
-assert(newFormula([0]), '0')
-assert(newFormula([1]), '1')
-assert(newFormula([-1]), '-1')
-assert(newFormula([0,1]), 'x')
-assert(newFormula([0,-1]), '-x')
-assert(newFormula([0,2]), '2x')
-assert(newFormula([0,-2]), '-2x')
-assert(newFormula([1,1]), 'x + 1')
-assert(newFormula([1,-4]), '-4x + 1')
-assert(newFormula([0,0,1]), 'x^2')
-assert(newFormula([0,0,-1]), '-x^2')
-assert(newFormula([0,0,-8]), '-8x^2')
-assert(newFormula([1,0,1]), 'x^2 + 1')
-assert(newFormula([2,-1,2,-2]), '-2x^3 + 2x^2 - x + 2')
-assert(newFormula([0,0,0,0,0,4]), '4x^5')
+// const assert = (result, expected) => {
+//   if (result != expected) console.error(`${result} != ${expected}`)
+// }
+
+// const newFormula = (terms) => new Polynomial(terms).toString()
+
+// assert(newFormula([0]), '0')
+// assert(newFormula([1]), '1')
+// assert(newFormula([-1]), '-1')
+// assert(newFormula([0,1]), 'x')
+// assert(newFormula([0,-1]), '-x')
+// assert(newFormula([0,2]), '2x')
+// assert(newFormula([0,-2]), '-2x')
+// assert(newFormula([1,1]), 'x + 1')
+// assert(newFormula([1,-4]), '-4x + 1')
+// assert(newFormula([0,0,1]), 'x^2')
+// assert(newFormula([0,0,-1]), '-x^2')
+// assert(newFormula([0,0,-8]), '-8x^2')
+// assert(newFormula([1,0,1]), 'x^2 + 1')
+// assert(newFormula([2,-1,2,-2]), '-2x^3 + 2x^2 - x + 2')
+// assert(newFormula([0,0,0,0,0,4]), '4x^5')
