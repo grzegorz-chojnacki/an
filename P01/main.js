@@ -1,6 +1,6 @@
 'use strict';
 
-const view = new class {
+const gui = new class {
   canvas    = document.getElementById('canvas')
   formula   = document.getElementById('formula')
   inputList = document.getElementById('inputList')
@@ -8,7 +8,7 @@ const view = new class {
     <div class="data-item data-group">
       <input type="number" name="year" step="1" placeholder="Rok">
       <input type="number" name="delta" placeholder="Przyrost">
-      <button class="remove-button" onclick="view.removeInput(this)">x</button>
+      <button class="remove-button" onclick="gui.removeInput(this)">x</button>
     </div>`
 
   spawnInput() {
@@ -32,39 +32,12 @@ const view = new class {
     this.spawnInput();
   }
 
-  getFormula(polynomial) {
-    const fullSign    = (coef) => coef >= 0 ? ' + ' : ' - '
-    const minimalSign = (coef) => coef >= 0 ? ''    : '-'
-    const simplifyOne = (coef) => Math.abs(coef) === 1 ? '' : coef
-    const saveOne     = (coef) => coef
-
-    const format = (coef, power, signFormat, oneSimplification) => (coef !== 0)
-      ? formatCoef(coef, signFormat, oneSimplification) + formatPower(power)
-      : ''
-
-    const formatCoef  = (coef, signFormat, oneSimplification) =>
-      signFormat(coef) + oneSimplification(Math.abs(coef))
-
-    const formatFreeTerm = (coef) => format(coef, 0, fullSign, saveOne)
-    const formatHighestTerm = (coef) =>
-      format(coef, polynomial.length - 1, minimalSign, simplifyOne)
-
-    const formatPower = (power) => (power > 1)
-      ? `x<sup>${power}</sup>`
-      : (power === 1) ? 'x' : ''
-
-    if (polynomial.length > 1) {
-      const [freeTerm, ...terms] = polynomial
-      const highestTerm = terms.pop()
-
-      return formatHighestTerm(highestTerm) + terms
-        .map((coef, index) => format(coef, index + 1, fullSign, simplifyOne))
-        .reduce((acc, term) => term + acc, formatFreeTerm(freeTerm))
-    } else return polynomial[0]
-  }
-
   printFormula(polynomial) {
-    this.formula.innerHTML = this.getFormula(polynomial)
+    const exponents = /\^(\d+)/gi
+    const exponentTemplate = '<span class="hidden">^</span><sup>$1</sup>'
+    this.formula.innerHTML = polynomial
+      .toString()
+      .replaceAll(exponents, exponentTemplate)
   }
 
   // TODO: Implement
@@ -74,23 +47,62 @@ const view = new class {
   printFunction(polynomial) {}
 }()
 
+class Polynomial {
+  terms = []
+  constructor(terms) { this.terms = terms }
+
+  toString() {
+    const fullSign    = n => n >= 0 ? ' + ' : ' - '
+    const minimalSign = n => n >= 0 ? ''    : '-'
+    const simplifyOne = n => Math.abs(n) === 1 ? '' : n
+    const saveOne     = n => n
+
+    const format = (term, power, signFormat, oneSimplification) => (term !== 0)
+      ? formatTerm(term, signFormat, oneSimplification) + formatPower(power)
+      : ''
+
+    const formatTerm  = (term, signFormat, oneSimplification) =>
+      signFormat(term) + oneSimplification(Math.abs(term))
+
+    const formatFreeTerm = (term) => format(term, 0, fullSign, saveOne)
+    const formatHighestTerm = (term) =>
+      format(term, this.terms.length - 1, minimalSign, simplifyOne)
+
+    const formatPower = (power) => (power > 1)
+      ? `x^${power}`
+      : (power === 1) ? 'x' : ''
+
+    if (this.terms.length > 1) {
+      const [freeTerm, ...terms] = this.terms
+      const highestTerm = terms.pop()
+
+      return formatHighestTerm(highestTerm) + terms
+        .map((term, index) => format(term, index + 1, fullSign, simplifyOne))
+        .reduce((acc, term) => term + acc, formatFreeTerm(freeTerm))
+    } else return this.terms[0]
+  }
+}
+
 const assert = (result, expected) => {
   if (result != expected) console.error(`${result} != ${expected}`)
 }
 
+const newFormula = (terms) => new Polynomial(terms).toString()
+gui.printFormula(new Polynomial([1, 2, 3, 4, 5, -6]))
+
 // Formula tests
-assert(view.getFormula([0]), '0')
-assert(view.getFormula([1]), '1')
-assert(view.getFormula([-1]), '-1')
-assert(view.getFormula([0,1]), 'x')
-assert(view.getFormula([0,-1]), '-x')
-assert(view.getFormula([0,2]), '2x')
-assert(view.getFormula([0,-2]), '-2x')
-assert(view.getFormula([1,1]), 'x + 1')
-assert(view.getFormula([1,-4]), '-4x + 1')
-assert(view.getFormula([0,0,1]), 'x<sup>2</sup>')
-assert(view.getFormula([0,0,-1]), '-x<sup>2</sup>')
-assert(view.getFormula([0,0,-8]), '-8x<sup>2</sup>')
-assert(view.getFormula([1,0,1]), 'x<sup>2</sup> + 1')
-assert(view.getFormula([2,-1,2,-2]), '-2x<sup>3</sup> + 2x<sup>2</sup> - x + 2')
-assert(view.getFormula([0,0,0,0,0,4]), '4x<sup>5</sup>')
+assert(newFormula([0]), '0')
+assert(newFormula([1]), '1')
+assert(newFormula([-1]), '-1')
+assert(newFormula([0,1]), 'x')
+assert(newFormula([0,-1]), '-x')
+assert(newFormula([0,2]), '2x')
+assert(newFormula([0,-2]), '-2x')
+assert(newFormula([1,1]), 'x + 1')
+assert(newFormula([1,-4]), '-4x + 1')
+assert(newFormula([0,0,1]), 'x^2')
+assert(newFormula([0,0,-1]), '-x^2')
+assert(newFormula([0,0,-8]), '-8x^2')
+assert(newFormula([1,0,1]), 'x^2 + 1')
+assert(newFormula([2,-1,2,-2]), '-2x^3 + 2x^2 - x + 2')
+assert(newFormula([0,0,0,0,0,4]), '4x^5')
