@@ -33,27 +33,38 @@ const view = new class {
   }
 
   printFormula(polynomial) {
-    const formatCoef = (coef) => {
-      if (coef > 0) return ` + ${coef}`
-      else return ` - ${-coef}`
-    }
+    const fullSign    = (coef) => coef >= 0 ? ' + ' : ' - '
+    const minimalSign = (coef) => coef >= 0 ? ''    : '-'
+    const simplifyOne = (coef) => Math.abs(coef) === 1 ? '' : coef
+    const saveOne    = (coef) => coef
+    const formatCoef = (coef, signFormat, oneSimplification) =>
+      signFormat(coef) + oneSimplification(Math.abs(coef))
 
-    const formatPower = (power) => {
-      if (power > 1) return `x<sup>${power}</sup>`
-      else if (power === 1) return 'x'
-      else return ''
-    }
+    const formatFreeTerm = (coef) => (coef !== 0)
+      ? formatCoef(coef, fullSign, saveOne) : ''
 
-    const format = (coef, power) => {
-      if (coef !== 0) return formatCoef(coef) + formatPower(power)
-      else return ''
-    }
+    const formatHighestTerm = (coef) =>
+      formatCoef(coef, minimalSign, simplifyOne)
+      + formatPower(polynomial.length - 1)
 
-    let monomials = polynomial.map(format)
+    const format = (coef, power) => (coef !== 0)
+      ? formatCoef(coef, fullSign, simplifyOne) + formatPower(power + 1) : ''
 
-    this.formula.innerHTML = monomials
-      .reduce((acc, monomial) => monomial + acc)
-      .slice(3) // Remove leading '+' or '-' sign
+    const formatPower = (power) => (power > 1)
+      ? `x<sup>${power}</sup>`
+      : (power === 1) ? 'x' : ''
+
+    if (polynomial.length > 1) {
+      const [freeTerm, ...terms] = polynomial
+      const highestTerm = terms.pop()
+
+      this.formula.innerHTML =
+        formatHighestTerm(highestTerm) +
+        terms
+          .map(format)
+          .reduce((acc, term) => term + acc, formatFreeTerm(freeTerm))
+
+    } else this.formula.innerHTML = polynomial[0]
   }
 
   // TODO: Implement
@@ -65,4 +76,4 @@ const view = new class {
 
 // TODO: Remove
 // 2x^3 + 10x^2 - 5
-view.printFormula([-5, 0, 10, 2])
+view.printFormula([-1, -2, -2])
