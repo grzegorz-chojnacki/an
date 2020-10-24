@@ -8,7 +8,7 @@ const view = new class {
     <div class="data-item data-group">
       <input type="number" name="year" step="1" placeholder="Rok">
       <input type="number" name="delta" placeholder="Przyrost">
-      <button class="remove-button" onClick="view.removeInput(this)">x</button>
+      <button class="remove-button" onclick="view.removeInput(this)">x</button>
     </div>`
 
   spawnInput() {
@@ -33,26 +33,36 @@ const view = new class {
   }
 
   printFormula(polynomial) {
-    const formatCoef = (coef) =>
-      (coef > 0) ? ` + ${coef}` : ` - ${-coef}`
+    const formatCoef = (coef) => {
+      if (coef > 0) return ` + ${coef}`
+      else return ` - ${-coef}`
+    }
 
-    const formatPower = (power) =>
-      (power !== 0) ? `x<sup>${power}</sup>` : ''
+    const formatPower = (power) => {
+      if (power > 1) return `x<sup>${power}</sup>`
+      else if (power === 1) return 'x'
+      else return ''
+    }
 
-    const format = (coef, power) =>
-      (coef !== 0) ? formatCoef(coef) + formatPower(power) : ''
+    const format = (coef, power) => {
+      if (coef !== 0) return formatCoef(coef) + formatPower(power)
+      else return ''
+    }
 
-    let monomials = polynomial
-      .map((coef, power) => format(coef, power))
-      .reverse()
+    let monomials = polynomial.map(format)
 
     this.formula.innerHTML = monomials
-      .reduce((acc, monomial) => acc + monomial)
+      .reduce((acc, monomial) => monomial + acc)
+      .slice(3) // Remove leading '+' or '-' sign
   }
 
   // TODO: Implement
   // https://developer.mozilla.org/en-US/docs/Web/API/File/Using_files_from_web_applications
   importData() { }
+  // TODO: Implement function to draw polynomial on canvas
+  printFunction(polynomial) {}
 }()
 
+// TODO: Remove
+// 2x^3 + 10x^2 - 5
 view.printFormula([-5, 0, 10, 2])
