@@ -21,6 +21,11 @@ header, main {
 }
 
 span.unit { letter-spacing: 0.2em; }
+span.hidden {
+  display: inline-block;
+  width: 0;
+  opacity: 0;
+}
 
 .data-group {
   width: 100%;
