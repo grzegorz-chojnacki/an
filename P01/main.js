@@ -2,7 +2,7 @@
 
 const expect = (result) => ({
   toBe: (expected) => (result !== expected)
-    ? console.error(`${result} != ${expected}`)
+    ? console.error(`${result} !== ${expected}`)
     : undefined
 })
 
@@ -82,6 +82,9 @@ const gui = new class {
   printFunction(polynomial) { }
 }()
 
+const init = (arr) => arr.slice(0, arr.length - 1)
+const last = (arr) => arr[arr.length - 1]
+
 class Polynomial {
   terms = []
   constructor(terms) {
@@ -121,51 +124,47 @@ class Polynomial {
   }
 }
 
-const init = (arr) => arr.slice(0, arr.length - 1)
-const last = (arr) => arr[arr.length - 1]
+class NewtonEvaluator {
+  constructor(points) { this.points = points }
 
-const xMult = (points, init = 1) => (x) =>
-  points.reduce((acc, point) => acc * (x - point.x), init)
+  setPoints(points) {
+    // ToDo: If points are the same or only differ by one, use old Bs
+    // to calculate new Bs
+    this.points = points
+  }
 
-const B = (points) => {
-  if (points.length === 1) return points[0].y
-  else return (last(points).y - P(init(points))(last(points).x) )
-              / xMult(init(points))(last(points).x)
+  getBs() {
+    // ToDo: Memoizing
+    const xMult = (points, init = 1) => (x) =>
+      points.reduce((acc, point) => acc * (x - point.x), init)
+
+    const P = (points) => (x) => {
+      if (points.length === 1) return points[0].y
+      else return P(init(points))(x) + getB(points) * xMult(init(points))(x)
+    }
+
+    const getB = (points) => {
+      if (points.length === 1) return points[0].y
+      else return (last(points).y - P(init(points))(last(points).x))
+                  / xMult(init(points))(last(points).x)
+    }
+
+    return points.map((point, index) => getB(points.slice(0, index + 1)))
+  }
 }
 
-const P = (points) => (x) => {
-  if (points.length === 1) return points[0].y
-  else return P(init(points))(x) + B(points) * xMult(init(points))(x)
-}
 
-let points = [{ x:  2, y:  4 }]
-let fn = P(points)
-expect(fn( 2)).toBe(4)
-
-points = [...points, { x: -1, y:  1 }]
-fn = P(points)
-expect(fn( 2)).toBe(4)
-expect(fn(-1)).toBe(1)
-
-points = [...points, { x:  3, y: 17 }]
-fn = P(points)
-expect(fn( 2)).toBe(4)
-expect(fn(-1)).toBe(1)
-expect(fn( 3)).toBe(17)
-
-points = [...points, { x:  1, y:  1 }]
-fn = P(points)
-expect(fn( 2)).toBe(4)
-expect(fn(-1)).toBe(1)
-expect(fn( 3)).toBe(17)
-expect(fn( 1)).toBe(1)
-
-
-
-// P(x[0]) = b[0]
-// P(x[1]) = b[0] + b[1](x - x[0])
-
-
+// let points = [
+//   { x:  2, y:  4 },
+//   { x: -1, y:  1 },
+//   { x:  3, y: 17 },
+//   { x:  1, y:  1 }
+// ]
+// const bs = new NewtonEvaluator(points).getBs()
+// expect(bs[0]).toBe(4)
+// expect(bs[1]).toBe(1)
+// expect(bs[2]).toBe(3)
+// expect(bs[3]).toBe(1)
 
 // const newFormula = (terms) => new Polynomial(terms).toString()
 
