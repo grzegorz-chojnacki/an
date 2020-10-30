@@ -130,6 +130,13 @@ class NewtonEvaluator {
   setPoints(points) {
     // ToDo: If points are the same or only differ by one, use old Bs
     // to calculate new Bs
+	/*
+	
+	if (!points.includes(point)) {
+      points.push(point);
+    }
+
+	*/
     this.points = points
   }
 
@@ -152,6 +159,7 @@ class NewtonEvaluator {
     return points.map((point, index) => getB(points.slice(0, index + 1)))
   }
 }
+
 
 
 // let points = [
