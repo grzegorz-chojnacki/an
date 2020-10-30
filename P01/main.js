@@ -6,10 +6,26 @@ const gui = new class {
   inputList = document.getElementById('inputList')
   dataItemTemplate = `
     <div class="data-item data-group">
-      <input type="number" name="year" step="1" placeholder="Rok">
-      <input type="number" name="delta" placeholder="Przyrost">
+      <input type="number" onchange="gui.calculate()" name="year" step="1" placeholder="Rok">
+      <input type="number" onchange="gui.calculate()" name="delta" placeholder="Przyrost">
       <button class="remove-button" onclick="gui.removeInput(this)">x</button>
     </div>`
+
+  debounce(func, wait) {
+    let timeout
+
+    return (...args) => {
+      const later = () => {
+        clearTimeout(timeout)
+        func(...args)
+      }
+
+      clearTimeout(timeout)
+      timeout = setTimeout(later, wait)
+    }
+  }
+
+  calculate = this.debounce(() => console.log('asdasd'), 1000)
 
   spawnInput() {
     const newInput = new DOMParser()
@@ -98,6 +114,51 @@ class Polynomial {
     } else return this.terms[0].toString()
   }
 }
+
+
+// b[n - 1] = y[n - 1] - b[0] - b[1](x - x[0]) - ... - b[n - 2](x - x[0]) * ... * (x - x[n - 3])
+//        ----------------------------------------------------------------------------
+//                          (x - x[0]) * ... * (x - x[n - 2])
+
+const init = (arr) => (arr.length > 1) ? arr.slice(0, arr.length - 1) : arr
+const last = (arr) => arr[arr.length - 1]
+
+const takeUntil = (arr, point) => arr.slice(0, arr.findIndex((p) => p.x == point.x) + 1)
+
+const multiply = (points) => (x) =>
+  points.reduce((acc, point) => acc * (x - point.x), 1)
+
+const nominatorGen = (points) => (x) =>
+  points.reduce((acc, point) =>
+    acc - getB(takeUntil(points, point)) * multiply(takeUntil(init(points), point))(x)
+  , 0)
+
+const getB = (points) => {
+  if (points.length === 1) return points[0].y
+  else return (last(points).y - nominatorGen(init(points))(last(points).x))
+            / multiply(init(points))(last(init(points)).x)
+}
+
+/*
+getB({x:2,y:4},{x:-1,y:1})
+=> (1 - nominatorGen({x:2,y:4})(-1)) / multiply({x:2,y:4})(-1)
+=> (1 - (0 - getB([{x:2,y:4}]) * multiply({x:2,y:4},{x:-1,y:1})(-1)) / (1 * (-1 - 2) * (-1 + 1))
+=> (1 - (0 - 4 * (-3)))
+*/
+
+
+const points = [
+  { x:  2, y:  4 },
+  { x: -1, y:  1 },
+  // { x:  3, y: 17 },
+  // { x:  1, y:  1 }
+]
+
+console.log(getB(points))
+
+
+// P(x[0]) = b[0]
+// P(x[1]) = b[0] + b[1](x - x[0])
 
 // Formula tests
 // const assert = (result, expected) => {
