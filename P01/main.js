@@ -32,6 +32,15 @@ const gui = new class {
     this.spawnInput();
   }
 
+  getPoints() {
+    return [...gui.inputList.childNodes]
+    .map(container => container.getElementsByTagName('input'))
+    .map(container => ({
+      x: container.year.value,
+      y: container.delta.value
+    }))
+  }
+
   printFormula(polynomial) {
     const exponents = /\^(\d+)/g
     const pluses = /\+/g
@@ -86,7 +95,7 @@ class Polynomial {
       return formatHighestTerm(highestTerm) + terms
         .map((term, index) => format(term, index + 1, fullSign, simplifyOne))
         .reduce((acc, term) => term + acc, formatFreeTerm(freeTerm))
-    } else return this.terms[0]
+    } else return this.terms[0].toString()
   }
 }
 
