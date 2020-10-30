@@ -1,5 +1,11 @@
 'use strict';
 
+const expect = (result) => ({
+  toBe: (expected) => (result !== expected)
+    ? console.error(`${result} != ${expected}`)
+    : undefined
+})
+
 const gui = new class {
   canvas    = document.getElementById('canvas')
   formula   = document.getElementById('formula')
@@ -115,70 +121,66 @@ class Polynomial {
   }
 }
 
-
-// b[n - 1] = y[n - 1] - b[0] - b[1](x - x[0]) - ... - b[n - 2](x - x[0]) * ... * (x - x[n - 3])
-//        ----------------------------------------------------------------------------
-//                          (x - x[0]) * ... * (x - x[n - 2])
-
-const init = (arr) => (arr.length > 1) ? arr.slice(0, arr.length - 1) : arr
+const init = (arr) => arr.slice(0, arr.length - 1)
 const last = (arr) => arr[arr.length - 1]
 
-const takeUntil = (arr, point) => arr.slice(0, arr.findIndex((p) => p.x == point.x) + 1)
+const xMult = (points, init = 1) => (x) =>
+  points.reduce((acc, point) => acc * (x - point.x), init)
 
-const multiply = (points) => (x) =>
-  points.reduce((acc, point) => acc * (x - point.x), 1)
-
-const nominatorGen = (points) => (x) =>
-  points.reduce((acc, point) =>
-    acc - getB(takeUntil(points, point)) * multiply(takeUntil(init(points), point))(x)
-  , 0)
-
-const getB = (points) => {
+const B = (points) => {
   if (points.length === 1) return points[0].y
-  else return (last(points).y - nominatorGen(init(points))(last(points).x))
-            / multiply(init(points))(last(init(points)).x)
+  else return (last(points).y - P(init(points))(last(points).x) )
+              / xMult(init(points))(last(points).x)
 }
 
-/*
-getB({x:2,y:4},{x:-1,y:1})
-=> (1 - nominatorGen({x:2,y:4})(-1)) / multiply({x:2,y:4})(-1)
-=> (1 - (0 - getB([{x:2,y:4}]) * multiply({x:2,y:4},{x:-1,y:1})(-1)) / (1 * (-1 - 2) * (-1 + 1))
-=> (1 - (0 - 4 * (-3)))
-*/
+const P = (points) => (x) => {
+  if (points.length === 1) return points[0].y
+  else return P(init(points))(x) + B(points) * xMult(init(points))(x)
+}
 
+let points = [{ x:  2, y:  4 }]
+let fn = P(points)
+expect(fn( 2)).toBe(4)
 
-const points = [
-  { x:  2, y:  4 },
-  { x: -1, y:  1 },
-  // { x:  3, y: 17 },
-  // { x:  1, y:  1 }
-]
+points = [...points, { x: -1, y:  1 }]
+fn = P(points)
+expect(fn( 2)).toBe(4)
+expect(fn(-1)).toBe(1)
 
-console.log(getB(points))
+points = [...points, { x:  3, y: 17 }]
+fn = P(points)
+expect(fn( 2)).toBe(4)
+expect(fn(-1)).toBe(1)
+expect(fn( 3)).toBe(17)
+
+points = [...points, { x:  1, y:  1 }]
+fn = P(points)
+expect(fn( 2)).toBe(4)
+expect(fn(-1)).toBe(1)
+expect(fn( 3)).toBe(17)
+expect(fn( 1)).toBe(1)
+
 
 
 // P(x[0]) = b[0]
 // P(x[1]) = b[0] + b[1](x - x[0])
 
-// Formula tests
-// const assert = (result, expected) => {
-//   if (result != expected) console.error(`${result} != ${expected}`)
-// }
+
 
 // const newFormula = (terms) => new Polynomial(terms).toString()
 
-// assert(newFormula([0]), '0')
-// assert(newFormula([1]), '1')
-// assert(newFormula([-1]), '-1')
-// assert(newFormula([0,1]), 'x')
-// assert(newFormula([0,-1]), '-x')
-// assert(newFormula([0,2]), '2x')
-// assert(newFormula([0,-2]), '-2x')
-// assert(newFormula([1,1]), 'x + 1')
-// assert(newFormula([1,-4]), '-4x + 1')
-// assert(newFormula([0,0,1]), 'x^2')
-// assert(newFormula([0,0,-1]), '-x^2')
-// assert(newFormula([0,0,-8]), '-8x^2')
-// assert(newFormula([1,0,1]), 'x^2 + 1')
-// assert(newFormula([2,-1,2,-2]), '-2x^3 + 2x^2 - x + 2')
-// assert(newFormula([0,0,0,0,0,4]), '4x^5')
+// expect(newFormula([0])).toBe('0')
+// expect(newFormula([1])).toBe('1')
+// expect(newFormula([-1])).toBe('-1')
+// expect(newFormula([0,1])).toBe('x')
+// expect(newFormula([0,-1])).toBe('-x')
+// expect(newFormula([0,2])).toBe('2x')
+// expect(newFormula([0,-2])).toBe('-2x')
+// expect(newFormula([1,1])).toBe('x + 1')
+// expect(newFormula([1,-4])).toBe('-4x + 1')
+// expect(newFormula([0,0,1])).toBe('x^2')
+// expect(newFormula([0,0,-1])).toBe('-x^2')
+// expect(newFormula([0,0,-8])).toBe('-8x^2')
+// expect(newFormula([1,0,1])).toBe('x^2 + 1')
+// expect(newFormula([2,-1,2,-2])).toBe('-2x^3 + 2x^2 - x + 2')
+// expect(newFormula([0,0,0,0,0,4])).toBe('4x^5')
