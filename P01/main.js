@@ -25,7 +25,14 @@ const gui = new class {
     }
   }
 
-  update = this.debounce(() => console.log('asdasd'), 1000)
+  doStuff() {
+    // ToDo: act when some inputs have NaN values
+    const points = this.getPoints()
+    const Bs = new NewtonEvaluator(points).getBs()
+    console.log(Bs)
+  }
+
+  update = this.debounce(() => this.doStuff(), 1000)
 
   spawnInput() {
     const newInput = new DOMParser()
@@ -52,8 +59,8 @@ const gui = new class {
     return [...gui.inputList.childNodes]
     .map(container => container.getElementsByTagName('input'))
     .map(container => ({
-      x: container.year.value,
-      y: container.delta.value
+      x: parseInt(container.year.value),
+      y: parseInt(container.delta.value)
     }))
   }
 
@@ -149,7 +156,8 @@ class NewtonEvaluator {
                   / xMult(init(points))(last(points).x)
     }
 
-    return points.map((point, index) => getB(points.slice(0, index + 1)))
+    return this.points
+      .map((point, index) => getB(this.points.slice(0, index + 1)))
   }
 }
 
