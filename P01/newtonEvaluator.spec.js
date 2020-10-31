@@ -13,5 +13,4 @@ const NewtonEvaluatorTests = (() => {
   expect(bs[1]).toBe(1)
   expect(bs[2]).toBe(3)
   expect(bs[3]).toBe(1)
-  return
 })()

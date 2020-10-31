@@ -1,6 +1,6 @@
 'use strict';
 
-const gui = new class {
+const gui = new (class {
   canvas    = document.getElementById('canvas')
   formula   = document.getElementById('formula')
   inputList = document.getElementById('inputList')
@@ -17,7 +17,7 @@ const gui = new class {
     const evaluator = new NewtonEvaluator(points)
 
     const bs = evaluator.getBs()
-    // const polynomial = evaluator.getPolynomials()
+    // const polynomial = evaluator.getPolynomial()
 
     console.log(bs)
   }
@@ -42,15 +42,15 @@ const gui = new class {
     const inputs = [...this.inputList.childNodes]
     inputs.forEach(node => this.inputList.removeChild(node))
 
-    this.spawnInput();
+    this.spawnInput()
   }
 
   getPoints() {
     return [...gui.inputList.childNodes]
     .map(container => container.getElementsByTagName('input'))
     .map(container => ({
-      x: parseInt(container.year.value),
-      y: parseInt(container.delta.value)
+      x: parseFloat(container.year.value),
+      y: parseFloat(container.delta.value)
     }))
   }
 
@@ -71,4 +71,4 @@ const gui = new class {
   importData() { }
   // TODO: Implement function to draw polynomial on canvas
   printFunction(polynomial) { }
-}()
+})()

@@ -15,8 +15,8 @@ class NewtonEvaluator {
     this.points = points
   }
 
-  getPolynomials() {
-    /**   x :  2, -1, 3, 1
+  getPolynomial() {
+    /**   x:  2, -1, 3, 1
      * f(x):  4, 1, 17, 1
      *
      *
@@ -25,8 +25,8 @@ class NewtonEvaluator {
      *      + b2 * P2
      *      + b3 * P3
      *
-     * P0 = f(x0) = 4
-     *    => [4]
+     * P0 = 1
+     *    => [1]
      *
      * P1 = (x - x0) = (x - 2)
      *    => [-2, 1]
