@@ -7,9 +7,9 @@ class NewtonEvaluator {
     // ToDo: If points are the same or only differ by one, use old Bs
     // to calculate new Bs
 
-    if (!points.includes(point)) {
-      points.push(point)
-    }
+    // if (!points.includes(point)) {
+    //   points.push(point)
+    // }
 
 
     this.points = points
