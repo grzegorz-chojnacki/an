@@ -168,8 +168,8 @@ const tests = () => {
       : undefined
   })
 
-  ((EvaluatingBCoefficients) => {
-    let points = [
+  const NewtonEvaluatorTests = (() => {
+    const points = [
       { x:  2, y:  4 },
       { x: -1, y:  1 },
       { x:  3, y: 17 },
@@ -181,9 +181,10 @@ const tests = () => {
     expect(bs[1]).toBe(1)
     expect(bs[2]).toBe(3)
     expect(bs[3]).toBe(1)
+    return
   })()
 
-  ((PolynomialToString) => {
+  const PolynomialTests = (() => {
     const formulaOf = (terms) => new Polynomial(terms).toString()
 
     expect(formulaOf([0])).toBe('0')
