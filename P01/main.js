@@ -26,9 +26,18 @@ const gui = new class {
   }
 
   doStuff() {
+    const zip = (...rows) => [...rows[0]]
+      .map((_, index) => rows.map(row => row[index]))
+
+    console.log(zip([1, 2, 3, 4], ['a', 'b', 'c', 'd']))
+
     // ToDo: act when some inputs have NaN values
     const points = this.getPoints()
-    const Bs = new NewtonEvaluator(points).getBs()
+    const evaluator = new NewtonEvaluator(points)
+
+    const bs = evaluator.getBs()
+    // const polynomial = evaluator.getPolynomials()
+
     console.log(Bs)
   }
 
@@ -161,7 +170,7 @@ class NewtonEvaluator {
   }
 }
 
-const tests = () => {
+const tests = (() => {
   const expect = (result) => ({
     toBe: (expected) => (result !== expected)
       ? console.error(`${result} !== ${expected}`)
@@ -203,6 +212,4 @@ const tests = () => {
     expect(formulaOf([2,-1,2,-2])).toBe('-2x^3 + 2x^2 - x + 2')
     expect(formulaOf([0,0,0,0,0,4])).toBe('4x^5')
   })()
-}
-
-tests()
+})()
