@@ -7,6 +7,10 @@ class Polynomial {
     this.terms = terms
   }
 
+  // ToDo: Polynomial multiplication and addition
+  add(that) { }
+  multiply(that) { }
+
   toString() {
     const fullSign    = n => n >= 0 ? ' + ' : ' - '
     const minimalSign = n => n >= 0 ? ''    : '-'
