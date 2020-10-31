@@ -1,37 +1,31 @@
 'use strict';
 
-const expect = (result) => ({
-  toBe: (expected) => (result !== expected)
-    ? console.error(`${result} !== ${expected}`)
-    : undefined
-})
-
 const gui = new class {
   canvas    = document.getElementById('canvas')
   formula   = document.getElementById('formula')
   inputList = document.getElementById('inputList')
   dataItemTemplate = `
     <div class="data-item data-group">
-      <input type="number" onchange="gui.calculate()" name="year" step="1" placeholder="Rok">
-      <input type="number" onchange="gui.calculate()" name="delta" placeholder="Przyrost">
+      <input type="number" onkeyup="gui.update()" name="year" step="1" placeholder="Rok">
+      <input type="number" onkeyup="gui.update()" name="delta" placeholder="Przyrost">
       <button class="remove-button" onclick="gui.removeInput(this)">x</button>
     </div>`
 
-  debounce(func, wait) {
+  debounce(fn, delay) {
     let timeout
 
     return (...args) => {
       const later = () => {
         clearTimeout(timeout)
-        func(...args)
+        fn(...args)
       }
 
       clearTimeout(timeout)
-      timeout = setTimeout(later, wait)
+      timeout = setTimeout(later, delay)
     }
   }
 
-  calculate = this.debounce(() => console.log('asdasd'), 1000)
+  update = this.debounce(() => console.log('asdasd'), 1000)
 
   spawnInput() {
     const newInput = new DOMParser()
@@ -130,13 +124,12 @@ class NewtonEvaluator {
   setPoints(points) {
     // ToDo: If points are the same or only differ by one, use old Bs
     // to calculate new Bs
-	/*
-	
-	if (!points.includes(point)) {
-      points.push(point);
+
+    if (!points.includes(point)) {
+      points.push(point)
     }
 
-	*/
+
     this.points = points
   }
 
@@ -160,34 +153,47 @@ class NewtonEvaluator {
   }
 }
 
+const tests = () => {
+  const expect = (result) => ({
+    toBe: (expected) => (result !== expected)
+      ? console.error(`${result} !== ${expected}`)
+      : undefined
+  })
 
+  ((EvaluatingBCoefficients) => {
+    let points = [
+      { x:  2, y:  4 },
+      { x: -1, y:  1 },
+      { x:  3, y: 17 },
+      { x:  1, y:  1 }
+    ]
 
-// let points = [
-//   { x:  2, y:  4 },
-//   { x: -1, y:  1 },
-//   { x:  3, y: 17 },
-//   { x:  1, y:  1 }
-// ]
-// const bs = new NewtonEvaluator(points).getBs()
-// expect(bs[0]).toBe(4)
-// expect(bs[1]).toBe(1)
-// expect(bs[2]).toBe(3)
-// expect(bs[3]).toBe(1)
+    const bs = new NewtonEvaluator(points).getBs()
+    expect(bs[0]).toBe(4)
+    expect(bs[1]).toBe(1)
+    expect(bs[2]).toBe(3)
+    expect(bs[3]).toBe(1)
+  })()
 
-// const newFormula = (terms) => new Polynomial(terms).toString()
+  ((PolynomialToString) => {
+    const formulaOf = (terms) => new Polynomial(terms).toString()
 
-// expect(newFormula([0])).toBe('0')
-// expect(newFormula([1])).toBe('1')
-// expect(newFormula([-1])).toBe('-1')
-// expect(newFormula([0,1])).toBe('x')
-// expect(newFormula([0,-1])).toBe('-x')
-// expect(newFormula([0,2])).toBe('2x')
-// expect(newFormula([0,-2])).toBe('-2x')
-// expect(newFormula([1,1])).toBe('x + 1')
-// expect(newFormula([1,-4])).toBe('-4x + 1')
-// expect(newFormula([0,0,1])).toBe('x^2')
-// expect(newFormula([0,0,-1])).toBe('-x^2')
-// expect(newFormula([0,0,-8])).toBe('-8x^2')
-// expect(newFormula([1,0,1])).toBe('x^2 + 1')
-// expect(newFormula([2,-1,2,-2])).toBe('-2x^3 + 2x^2 - x + 2')
-// expect(newFormula([0,0,0,0,0,4])).toBe('4x^5')
+    expect(formulaOf([0])).toBe('0')
+    expect(formulaOf([1])).toBe('1')
+    expect(formulaOf([-1])).toBe('-1')
+    expect(formulaOf([0,1])).toBe('x')
+    expect(formulaOf([0,-1])).toBe('-x')
+    expect(formulaOf([0,2])).toBe('2x')
+    expect(formulaOf([0,-2])).toBe('-2x')
+    expect(formulaOf([1,1])).toBe('x + 1')
+    expect(formulaOf([1,-4])).toBe('-4x + 1')
+    expect(formulaOf([0,0,1])).toBe('x^2')
+    expect(formulaOf([0,0,-1])).toBe('-x^2')
+    expect(formulaOf([0,0,-8])).toBe('-8x^2')
+    expect(formulaOf([1,0,1])).toBe('x^2 + 1')
+    expect(formulaOf([2,-1,2,-2])).toBe('-2x^3 + 2x^2 - x + 2')
+    expect(formulaOf([0,0,0,0,0,4])).toBe('4x^5')
+  })()
+}
+
+tests()
