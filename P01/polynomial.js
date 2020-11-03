@@ -5,8 +5,18 @@ class Polynomial {
   constructor(terms) {
     if (terms.length === 0) throw new Error('Term list is empty')
     this.terms = terms
+    this.trimZeros()
   }
 
+  trimZeros() {
+    const trimmed = (terms) => {
+      if (terms.length === 0) return [0]
+      else if (last(terms) !== 0) return terms
+      else trimmed(tail(terms))
+    }
+
+    this.terms = trimmed(this.terms) || [0]
+  }
 
   add(that) {
     const [longer, shorter] = (this.terms.length >= that.terms.length)
@@ -20,7 +30,18 @@ class Polynomial {
   }
 
   // ToDo: Polynomial multiplication
-  multiply(that) { }
+  multiply(that) {
+    const padLeft = (arr, padding) => (new Array(padding)).fill(0).concat(arr)
+    const multiplyByTerm = (term, power, that) => {
+      const multiplied = that.terms.map(thatTerm => term * thatTerm)
+      return padLeft(multiplied, power)
+    }
+
+    return this.terms
+      .map((term, power) => multiplyByTerm(term, power, that))
+      .map(terms => new Polynomial(terms))
+      .reduce((acc, polynomial) => acc.add(polynomial))
+  }
 
   toString() {
     const fullSign    = n => n >= 0 ? ' + ' : ' - '

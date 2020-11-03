@@ -1,6 +1,9 @@
 'use strict';
 
 const PolynomialTests = (() => {
+  expect(new Polynomial([0, 0, 0]).terms).toEqual([0])
+  expect(new Polynomial([0, 0, 1]).terms).toEqual([0, 0, 1])
+
   const formulaOf = (terms) => new Polynomial(terms).toString()
 
   expect(formulaOf([0])).toBe('0')
@@ -31,4 +34,22 @@ const PolynomialTests = (() => {
   expect(additionOf([1, 2], [2, 1])).toEqual([3, 3])
   expect(additionOf([0, 0, 3], [1, 2, 0, 4])).toEqual([1, 2, 3, 4])
   expect(additionOf([0, 2, 0, 4], [1, 0, 3])).toEqual([1, 2, 3, 4])
+
+  const productOf = (termsA, termsB) =>
+    (new Polynomial(termsA)).multiply(new Polynomial(termsB)).terms
+
+  expect(productOf([3], [4])).toEqual([12])
+  expect(productOf([1, 2, 3], [0])).toEqual([0])
+  expect(productOf([0], [1, 2, 3])).toEqual([0])
+  expect(productOf([1, 2, 3], [1])).toEqual([1, 2, 3])
+  expect(productOf([1], [1, 2, 3])).toEqual([1, 2, 3])
+  expect(productOf([2], [1, 2, 3])).toEqual([2, 4, 6])
+  expect(productOf([-1], [1, -2, 3])).toEqual([-1, 2, -3])
+  // (3x + 3)(3x - 3) = 9x^2 - 9
+  expect(productOf([3, 3], [-3, 3])).toEqual([-9, 0, 9])
+  // (2x + 3)(2x + 3) = 4x^2 + 12x + 9
+  expect(productOf([3, 2], [3, 2])).toEqual([9, 12, 4])
+  expect(productOf([-3, 2], [-3, 2])).toEqual([9, -12, 4])
+  // (3x + 2)(2x^2 - 3x + 3) = 6x^2 - 5x^2 + 3x + 6
+  expect(productOf([2, 3], [3, -3, 2])).toEqual([6, 3, -5, 6])
 })()
