@@ -3,20 +3,17 @@
 class Polynomial {
   terms = []
   constructor(terms) {
-    if (terms.length === 0) throw new Error('Term list is empty')
-    this.terms = terms
-    this.trimZeros()
-  }
-
-  trimZeros() {
     const trimmed = (terms) => {
+      console.log(terms)
       if (terms.length === 0) return [0]
       else if (last(terms) !== 0) return terms
-      else trimmed(tail(terms))
+      else return trimmed(init(terms))
     }
 
-    this.terms = trimmed(this.terms)
+    if (terms.length === 0) throw new Error('Term list is empty')
+    this.terms = trimmed(terms)
   }
+
 
   add(that) {
     const [longer, shorter] = (this.terms.length >= that.terms.length)

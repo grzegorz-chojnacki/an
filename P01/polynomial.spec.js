@@ -1,8 +1,11 @@
 'use strict';
 
 const PolynomialTests = (() => {
-  expect(new Polynomial([0, 0, 0]).terms).toEqual([0])
-  expect(new Polynomial([0, 0, 1]).terms).toEqual([0, 0, 1])
+  const trimmed = (terms) => (new Polynomial(terms)).terms
+
+  expect(trimmed([0, 0, 0])).toEqual([0])
+  expect(trimmed([0, 0, 1])).toEqual([0, 0, 1])
+  expect(trimmed([0, 0, 1, 0, 0])).toEqual([0, 0, 1])
 
   const formulaOf = (terms) => new Polynomial(terms).toString()
 

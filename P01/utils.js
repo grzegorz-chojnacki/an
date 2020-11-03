@@ -28,7 +28,6 @@ const debounce = (fn, delay) => {
 
 // Collections
 const init = (arr) => arr.slice(0, arr.length - 1)
-const tail = (arr) => arr.slice(1, arr.length)
 const last = (arr) => arr[arr.length - 1]
 
 const zip = (...rows) =>
