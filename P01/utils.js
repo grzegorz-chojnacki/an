@@ -4,6 +4,10 @@
 const expect = (result) => ({
   toBe: (expected) => (result !== expected)
     ? console.error(`${result} !== ${expected}`)
+    : undefined,
+
+  toEqual: (expected) => (JSON.stringify(result) != JSON.stringify(expected))
+    ? console.error(`${result} !== ${expected}`)
     : undefined
 })
 
