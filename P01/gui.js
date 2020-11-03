@@ -11,18 +11,17 @@ const gui = new (class {
       <button class="remove-button" onclick="gui.removeInput(this)">x</button>
     </div>`
 
-  doStuff() {
-    // ToDo: act when some inputs have NaN values
+  recalculate() {
     const points = this.getPoints()
+      .filter(point => point.x && point.y)
+
     const evaluator = new NewtonEvaluator(points)
 
-    const bs = evaluator.getBs()
-    // const polynomial = evaluator.getPolynomial()
-
-    console.log(bs)
+    const polynomial = evaluator.getPolynomial()
+    this.printFormula(polynomial)
   }
 
-  update = debounce(() => this.doStuff(), 1000)
+  update = debounce(() => this.recalculate(), 1000)
 
   spawnInput() {
     const newInput = new DOMParser()
@@ -47,11 +46,11 @@ const gui = new (class {
 
   getPoints() {
     return [...gui.inputList.childNodes]
-    .map(container => container.getElementsByTagName('input'))
-    .map(container => ({
-      x: parseFloat(container.year.value),
-      y: parseFloat(container.delta.value)
-    }))
+      .map(container => container.getElementsByTagName('input'))
+      .map(container => ({
+        x: parseFloat(container.year.value),
+        y: parseFloat(container.delta.value)
+      }))
   }
 
   printFormula(polynomial) {
