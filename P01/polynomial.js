@@ -19,14 +19,15 @@ class Polynomial {
       ? [this, that]
       : [that, this]
 
+    // Shorter list has undefined elements at the end when zipped with longer list
     const addedTerms = zip(longer.terms, shorter.terms)
       .map(pair => pair[1] == undefined ? pair[0] : pair[0] + pair[1])
 
     return new Polynomial(addedTerms)
   }
 
-  // ToDo: Polynomial multiplication
   multiply(that) {
+    // When multiplying by x^n, each term is raised by power n => array shifts by n
     const padLeft = (arr, padding) => (new Array(padding)).fill(0).concat(arr)
     const multiplyByTerm = (term, power, that) => {
       const multiplied = that.terms.map(thatTerm => term * thatTerm)
