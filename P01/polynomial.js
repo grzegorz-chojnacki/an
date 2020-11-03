@@ -4,7 +4,6 @@ class Polynomial {
   terms = []
   constructor(terms) {
     const trimmed = (terms) => {
-      console.log(terms)
       if (terms.length === 0) return [0]
       else if (last(terms) !== 0) return terms
       else return trimmed(init(terms))
