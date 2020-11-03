@@ -7,8 +7,19 @@ class Polynomial {
     this.terms = terms
   }
 
-  // ToDo: Polynomial multiplication and addition
-  add(that) { }
+
+  add(that) {
+    const [longer, shorter] = (this.terms.length >= that.terms.length)
+      ? [this, that]
+      : [that, this]
+
+    const addedTerms = zip(longer.terms, shorter.terms)
+      .map(pair => pair[1] == undefined ? pair[0] : pair[0] + pair[1])
+
+    return new Polynomial(addedTerms)
+  }
+
+  // ToDo: Polynomial multiplication
   multiply(that) { }
 
   toString() {
