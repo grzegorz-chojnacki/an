@@ -15,7 +15,7 @@ class Polynomial {
       else trimmed(tail(terms))
     }
 
-    this.terms = trimmed(this.terms) || [0]
+    this.terms = trimmed(this.terms)
   }
 
   add(that) {
