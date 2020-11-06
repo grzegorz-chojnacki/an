@@ -1,12 +1,12 @@
 'use strict';
 
 // Tests
-const expect = (result) => ({
-  toBe: (expected) => (result !== expected)
+const expect = result => ({
+  toBe: expected => (result !== expected)
     ? console.error(`${result} !== ${expected}`)
     : undefined,
 
-  toEqual: (expected) => (JSON.stringify(result) != JSON.stringify(expected))
+  toEqual: expected => (JSON.stringify(result) != JSON.stringify(expected))
     ? console.error(`${result} !== ${expected}`)
     : undefined
 })
@@ -27,8 +27,8 @@ const debounce = (fn, delay) => {
 }
 
 // Collections
-const init = (arr) => arr.slice(0, arr.length - 1)
-const last = (arr) => arr[arr.length - 1]
+const init = arr => arr.slice(0, arr.length - 1)
+const last = arr => arr[arr.length - 1]
 
 const zip = (...rows) =>
   [...rows[0]].map((_, index) => rows.map(row => row[index]))
