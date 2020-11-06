@@ -2,8 +2,9 @@
 
 class Polynomial {
   terms = []
+
   constructor(terms) {
-    const trimmed = (terms) => {
+    const trimmed = terms => {
       if (terms.length === 0) return [0]
       else if (last(terms) !== 0) return terms
       else return trimmed(init(terms))
@@ -20,20 +21,22 @@ class Polynomial {
 
     // Shorter list has undefined elements at the end when zipped with longer list
     const addedTerms = zip(longer.terms, shorter.terms)
-      .map(pair => pair[1] == undefined ? pair[0] : pair[0] + pair[1])
+      .map(([first, second]) => second == undefined ? first : first + second)
 
     return new Polynomial(addedTerms)
   }
 
   multiply(that) {
     // When multiplying by x^n, each term is raised by power n => array shifts by n
-    const padLeft = (arr, padding) => (new Array(padding)).fill(0).concat(arr)
-    const multiplyByTerm = (term, power, that) => {
-      const multiplied = that.terms.map(thatTerm => term * thatTerm)
+    const padLeft = (arr, padding) => new Array(padding).fill(0).concat(arr)
+
+    const multiplyByTerm = (thisTerm, power, that) => {
+      const multiplied = that.terms
+        .map(thatTerm => thatTerm * thisTerm)
       return padLeft(multiplied, power)
     }
 
-    if (typeof that == "number") return this.multiply(new Polynomial([that]))
+    if (typeof that === "number") return this.multiply(new Polynomial([that]))
     else return this.terms
       .map((term, power) => multiplyByTerm(term, power, that))
       .map(terms => new Polynomial(terms))
@@ -53,11 +56,11 @@ class Polynomial {
     const formatTerm  = (term, signFormat, oneSimplification) =>
       signFormat(term) + oneSimplification(Math.abs(term))
 
-    const formatFreeTerm = (term) => format(term, 0, fullSign, saveOne)
-    const formatHighestTerm = (term) =>
+    const formatFreeTerm = term => format(term, 0, fullSign, saveOne)
+    const formatHighestTerm = term =>
       format(term, this.terms.length - 1, minimalSign, simplifyOne)
 
-    const formatPower = (power) => (power > 1)
+    const formatPower = power => (power > 1)
       ? `x^${power}`
       : (power === 1) ? 'x' : ''
 
