@@ -11,34 +11,31 @@ class NewtonEvaluator {
     //   points.push(point)
     // }
 
-
     this.points = points
   }
 
   getPolynomial() {
-    /**   x:  2, -1, 3, 1
-     * f(x):  4, 1, 17, 1
-     *
-     *
-     * P(x) = b0 * P0
-     *      + b1 * P1
-     *      + b2 * P2
-     *      + b3 * P3
-     *
-     * P0 = 1
-     *    => [1]
-     *
-     * P1 = (x - x0) = (x - 2)
-     *    => [-2, 1]
-     *
-     * P2 = (x - x0)(x - x1) = (x - 2)(x + 1) => (x^2 - x - 2)
-     *    => [-2, -1, 1]
-     *
-     * P3 = (x - x0)(x - x1)(x - x2) = (x - 2)(x + 1)(x - 3)
-     *    = (x^3 - 4x^2 + x + 6)
-     *    => [6, 1, -4, 1]
-     *
-     */
+    this.points = [
+      { x:  2, y:  4 },
+      { x: -1, y:  1 },
+      { x:  3, y: 17 },
+      { x:  1, y:  1 }
+    ]
+
+    const steppedGroup = (polynomial, index, polynomials) =>
+      polynomials.slice(0, index + 1)
+    const multiplyAll = (acc, polynomial) => acc.multiply(polynomial)
+
+    const [b0, ...bs] = this.getBs()
+    const polynomials = init(this.points)
+      .map(point => new Polynomial([-point.x, 1]))
+      .map(steppedGroup)
+      .map(group => group.reduce(multiplyAll))
+
+    return polynomials
+      .map((polynomial, index) => polynomial.multiply(bs[index]))
+      .reduce((acc, polynomial) => acc.add(polynomial))
+      .add(new Polynomial([b0]))
   }
 
   getBs() {

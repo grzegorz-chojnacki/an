@@ -13,7 +13,6 @@ class Polynomial {
     this.terms = trimmed(terms)
   }
 
-
   add(that) {
     const [longer, shorter] = (this.terms.length >= that.terms.length)
       ? [this, that]
@@ -34,7 +33,8 @@ class Polynomial {
       return padLeft(multiplied, power)
     }
 
-    return this.terms
+    if (typeof that == "number") return this.multiply(new Polynomial([that]))
+    else return this.terms
       .map((term, power) => multiplyByTerm(term, power, that))
       .map(terms => new Polynomial(terms))
       .reduce((acc, polynomial) => acc.add(polynomial))

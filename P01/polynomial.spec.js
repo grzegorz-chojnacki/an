@@ -33,6 +33,8 @@ const PolynomialTests = (() => {
   expect(additionOf([2], [5])).toEqual([7])
   expect(additionOf([4], [0])).toEqual([4])
   expect(additionOf([0], [4])).toEqual([4])
+  expect(additionOf([0], [-4])).toEqual([-4])
+  expect(additionOf([-5], [-4])).toEqual([-9])
   expect(additionOf([1, 2], [4])).toEqual([5, 2])
   expect(additionOf([1, 2], [2, 1])).toEqual([3, 3])
   expect(additionOf([0, 0, 3], [1, 2, 0, 4])).toEqual([1, 2, 3, 4])
@@ -41,12 +43,18 @@ const PolynomialTests = (() => {
   const productOf = (termsA, termsB) =>
     (new Polynomial(termsA)).multiply(new Polynomial(termsB)).terms
 
+  const productOfN = (termsA, n) =>
+    (new Polynomial(termsA)).multiply(n).terms
+
   expect(productOf([3], [4])).toEqual([12])
+  expect(productOfN([3], 4)).toEqual([12])
   expect(productOf([1, 2, 3], [0])).toEqual([0])
+  expect(productOfN([1, 2, 3], 0)).toEqual([0])
   expect(productOf([0], [1, 2, 3])).toEqual([0])
   expect(productOf([1, 2, 3], [1])).toEqual([1, 2, 3])
   expect(productOf([1], [1, 2, 3])).toEqual([1, 2, 3])
   expect(productOf([2], [1, 2, 3])).toEqual([2, 4, 6])
+  expect(productOfN([1, 2, 3], 2)).toEqual([2, 4, 6])
   expect(productOf([-1], [1, -2, 3])).toEqual([-1, 2, -3])
   // (3x + 3)(3x - 3) = 9x^2 - 9
   expect(productOf([3, 3], [-3, 3])).toEqual([-9, 0, 9])
