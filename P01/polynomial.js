@@ -15,9 +15,19 @@ class Polynomial {
   }
 
   add(that) {
+    if (typeof that == 'number') return this.addNumber(that)
+    else return this.addPolynomial(that)
+  }
+
+  addNumber(that) {
+    const [head, ...tail] = this.terms
+    return new Polynomial([head + that, ...tail])
+  }
+
+  addPolynomial(that) {
     const [longer, shorter] = (this.terms.length >= that.terms.length)
-      ? [this, that]
-      : [that, this]
+    ? [this, that]
+    : [that, this]
 
     // Shorter list has undefined elements at the end when zipped with longer list
     const addedTerms = zip(longer.terms, shorter.terms)
