@@ -35,6 +35,8 @@ const gui = new (class {
     container.parentNode.removeChild(container)
 
     if (this.inputList.childElementCount === 0) { this.spawnInput() }
+
+    this.recalculate()
   }
 
   removeAllInputs() {
