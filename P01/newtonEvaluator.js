@@ -30,19 +30,24 @@ class NewtonEvaluator {
   }
 
   getBs() {
-    const xMult = (points) => points
+    const pointProduct = (points) => points
       .map(Polynomial.point)
       .reduce(Polynomial.product)
 
     const P = (points) => {
       if (points.length === 1) return new Polynomial([points[0].y])
-      else return P(init(points)).add(xMult(init(points)).multiply(getB(points)))
+      else {
+        const current = init(points)
+        return P(current).add(pointProduct(current).multiply(getB(points)))
+      }
     }
 
     const getB = (points) => {
       if (points.length === 1) return points[0].y
-      else return (last(points).y - P(init(points)).at(last(points).x))
-                  / xMult(init(points)).at(last(points).x)
+      else {
+        const [current, rest] = [last(points), init(points)]
+        return (current.y - P(rest).at(current.x)) / pointProduct(rest).at(current.x)
+      }
     }
 
     return this.points.map(getListSlicesFromStart).map(getB)
