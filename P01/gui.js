@@ -4,6 +4,7 @@ const gui = new (class {
   canvas    = document.getElementById('canvas')
   formula   = document.getElementById('formula')
   inputList = document.getElementById('inputList')
+  fileInput = document.getElementById('fileInput')
   dataItemTemplate = `
     <div class="data-item data-group">
       <input type="number" onkeyup="gui.update()" name="year" step="1" placeholder="Rok">
@@ -23,9 +24,15 @@ const gui = new (class {
 
   update = debounce(() => this.recalculate(), 1000)
 
-  spawnInput() {
+  spawnInput(point) {
     const newInput = new DOMParser()
       .parseFromString(this.dataItemTemplate, 'text/html').body.firstChild
+
+    if (point !== undefined) {
+      const inputs = newInput.getElementsByTagName('input')
+      inputs.year.value  = point.x
+      inputs.delta.value = point.y
+    }
 
     this.inputList.prepend(newInput)
   }
@@ -67,9 +74,33 @@ const gui = new (class {
       .replaceAll(exponents, exponentTemplate)
   }
 
-  // TODO: Implement
-  // https://developer.mozilla.org/en-US/docs/Web/API/File/Using_files_from_web_applications
-  importData() { }
+  showFileDialog() { this.fileInput.click() }
+
+  async importData(event) {
+    if (event.target.files.length > 0) {
+      const file = event.target.files.item(0)
+      const points = this.parsePoints(await file.text())
+      this.fillInputs(points)
+    }
+  }
+
+  parsePoints(fileContents) {
+    try {
+      // ToDo: Check if property x, y exists, not null
+      return JSON.parse(fileContents)
+    } catch (err) { this.formula.innerHTML = "Błąd wczytywania pliku" }
+    return []
+  }
+
+  fillInputs(points) {
+    this.removeAllInputs()
+
+    points.reverse().forEach(this.spawnInput)
+    this.recalculate()
+
+    this.inputList.lastChild.remove()
+  }
+
   // TODO: Implement function to draw polynomial on canvas
-  printFunction(polynomial) { }
+  drawFunction(polynomial) { }
 })()
