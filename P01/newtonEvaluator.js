@@ -21,7 +21,7 @@ class NewtonEvaluator {
 
     const [b0, ...bs] = this.getBs()
     const polynomials = init(this.points)
-      .map(point => new Polynomial([-point.x, 1]))
+      .map(point => Polynomial.point(point))
       .map(getListSlicesFromStart)
       .map(group => group.reduce(multiplyAll))
 
@@ -32,19 +32,21 @@ class NewtonEvaluator {
   }
 
   getBs() {
-    // ToDo: Memoizing
-    const xMult = (points, init = 1) => (x) =>
-      points.reduce((acc, point) => acc * (x - point.x), init)
+    const xMult = (points) => points
+      .reduce((acc, point) => acc.multiply(Polynomial.point(point)), Polynomial.one)
+
+    // const xMult = (points, init = 1) => (x) =>
+    //   points.reduce((acc, point) => acc * (x - point.x), init)
 
     const P = (points) => (x) => {
       if (points.length === 1) return points[0].y
-      else return P(init(points))(x) + getB(points) * xMult(init(points))(x)
+      else return P(init(points))(x) + getB(points) * xMult(init(points)).at(x)
     }
 
     const getB = (points) => {
       if (points.length === 1) return points[0].y
       else return (last(points).y - P(init(points))(last(points).x))
-                  / xMult(init(points))(last(points).x)
+                  / xMult(init(points)).at(last(points).x)
     }
 
     return this.points.map(getListSlicesFromStart).map(getB)
