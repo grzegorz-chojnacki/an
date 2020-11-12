@@ -12,16 +12,13 @@ const expect = result => ({
 })
 
 // Generalization
-const memoized = fn => {
-  const memory = new Map()
+const memoized = (fn, memory = new Map()) => (...args) => {
+  const key = JSON.stringify(args)
 
-  return (...args) => {
-    const key = JSON.stringify(args)
-
-    if (!memory.has(fn. key)) { memory.set(key, fn(...args)) }
-    return memory.get(key)
-  }
+  if (!memory.has(key)) { memory.set(key, fn(...args)) }
+  return memory.get(key)
 }
+
 
 // Event handling
 const debounce = (fn, delay) => {
