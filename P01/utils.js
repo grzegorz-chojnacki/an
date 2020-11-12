@@ -6,10 +6,22 @@ const expect = result => ({
     ? console.error(`${result} !== ${expected}`)
     : undefined,
 
-  toEqual: expected => (JSON.stringify(result) != JSON.stringify(expected))
+  toEqual: expected => (JSON.stringify(result) !== JSON.stringify(expected))
     ? console.error(`${result} !== ${expected}`)
     : undefined
 })
+
+// Generalization
+const memoized = fn => {
+  const memory = new Map()
+
+  return (...args) => {
+    const key = JSON.stringify(args)
+
+    if (!memory.has(fn. key)) { memory.set(key, fn(...args)) }
+    return memory.get(key)
+  }
+}
 
 // Event handling
 const debounce = (fn, delay) => {

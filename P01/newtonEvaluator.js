@@ -34,22 +34,23 @@ class NewtonEvaluator {
       .map(Polynomial.point)
       .reduce(Polynomial.product)
 
-    const P = (points) => {
+    const P = memoized((points) => {
       if (points.length === 1) return new Polynomial([points[0].y])
       else {
         const rest = init(points)
         return P(rest).add(pointProduct(rest).multiply(getB(points)))
       }
-    }
+    })
 
-    const getB = (points) => {
+    const getB = memoized((points) => {
       if (points.length === 1) return points[0].y
       else {
         const [current, rest] = [last(points), init(points)]
         return (current.y - P(rest).at(current.x)) / pointProduct(rest).at(current.x)
       }
-    }
+    })
 
-    return this.points.map(getListSlicesFromStart).map(getB)
+    const x =  this.points.map(getListSlicesFromStart).map(getB)
+    return x
   }
 }
