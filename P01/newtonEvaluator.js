@@ -34,14 +34,14 @@ class NewtonEvaluator {
       .map(Polynomial.point)
       .reduce(Polynomial.product)
 
-    const P = (points) => (x) => {
-      if (points.length === 1) return points[0].y
-      else return P(init(points))(x) + getB(points) * xMult(init(points)).at(x)
+    const P = (points) => {
+      if (points.length === 1) return new Polynomial([points[0].y])
+      else return P(init(points)).add(xMult(init(points)).multiply(getB(points)))
     }
 
     const getB = (points) => {
       if (points.length === 1) return points[0].y
-      else return (last(points).y - P(init(points))(last(points).x))
+      else return (last(points).y - P(init(points)).at(last(points).x))
                   / xMult(init(points)).at(last(points).x)
     }
 
