@@ -14,6 +14,10 @@ class Polynomial {
     this.terms = trimmed(terms)
   }
 
+  at(x) {
+    return this.terms.reduceRight((acc, term) => acc * x + term)
+  }
+
   add(that) {
     if (typeof that == 'number') return this.addNumber(that)
     else return this.addPolynomial(that)

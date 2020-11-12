@@ -7,6 +7,16 @@ const PolynomialTests = (() => {
   expect(trimmed([0, 0, 1])).toEqual([0, 0, 1])
   expect(trimmed([0, 0, 1, 0, 0])).toEqual([0, 0, 1])
 
+  expect(new Polynomial([0]).at(0)).toBe(0)
+  expect(new Polynomial([0]).at(1)).toBe(0)
+  expect(new Polynomial([5]).at(0)).toBe(5)
+  expect(new Polynomial([5]).at(1)).toBe(5)
+  expect(new Polynomial([0, 1]).at(1)).toBe(1)
+  expect(new Polynomial([0, 1]).at(2)).toBe(2)
+  expect(new Polynomial([0, 2]).at(2)).toBe(4)
+  expect(new Polynomial([3, 2]).at(2)).toBe(7)
+  expect(new Polynomial([4, 3, 2]).at(2)).toBe(18)
+
   const formulaOf = (terms) => new Polynomial(terms).toString()
 
   expect(formulaOf([0])).toBe('0')
