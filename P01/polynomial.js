@@ -1,6 +1,10 @@
 'use strict';
 
 class Polynomial {
+  static one  = new Polynomial([1])
+  static zero = new Polynomial([0])
+  static point  = (p) => new Polynomial([-p.x, 1])
+
   terms = []
 
   constructor(terms) {
@@ -11,7 +15,7 @@ class Polynomial {
     }
 
     if (terms.length === 0) throw new Error('Term list is empty')
-    this.terms = trimmed(terms)
+    else this.terms = trimmed(terms)
   }
 
   at(x) {
@@ -45,8 +49,7 @@ class Polynomial {
     const padLeft = (arr, padding) => new Array(padding).fill(0).concat(arr)
 
     const multiplyByTerm = (thisTerm, power, that) => {
-      const multiplied = that.terms
-        .map(thatTerm => thatTerm * thisTerm)
+      const multiplied = that.terms.map(thatTerm => thatTerm * thisTerm)
       return padLeft(multiplied, power)
     }
 
