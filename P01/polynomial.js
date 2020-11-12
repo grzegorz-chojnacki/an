@@ -39,9 +39,9 @@ class Polynomial {
     ? [this, that]
     : [that, this]
 
-    // Shorter list has undefined elements at the end when zipped with longer list
-    const addedTerms = zip(longer.terms, shorter.terms)
-      .map(([first, second]) => second == undefined ? first : first + second)
+    // Zipping shorter list with longer will cut excesive elements
+    // Order is important
+    const addedTerms = zip(longer.terms, shorter.terms).map(pairSum)
 
     return new Polynomial(addedTerms)
   }

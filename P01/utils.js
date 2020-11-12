@@ -27,6 +27,8 @@ const debounce = (fn, delay) => {
 }
 
 // Collections
+const pairSum = ([first = 0, second = 0]) => first + second
+
 const init = arr => arr.slice(0, arr.length - 1)
 const last = arr => arr[arr.length - 1]
 
