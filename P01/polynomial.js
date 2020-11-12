@@ -3,7 +3,9 @@
 class Polynomial {
   static one  = new Polynomial([1])
   static zero = new Polynomial([0])
-  static point  = (p) => new Polynomial([-p.x, 1])
+  static point = (p) => new Polynomial([-p.x, 1])
+  static product = (acc, polynomial) => acc.multiply(polynomial)
+  static sum     = (acc, polynomial) => acc.add(polynomial)
 
   terms = []
 
@@ -57,7 +59,7 @@ class Polynomial {
     else return this.terms
       .map((term, power) => multiplyByTerm(term, power, that))
       .map(terms => new Polynomial(terms))
-      .reduce((acc, polynomial) => acc.add(polynomial))
+      .reduce(Polynomial.sum)
   }
 
   toString() {
