@@ -17,15 +17,12 @@ class NewtonEvaluator {
   getPolynomial() {
     if (this.points.length === 1) return new Polynomial([this.points[0].y])
 
-    const steppedGroup = (polynomial, index, polynomials) =>
-      polynomials.slice(0, index + 1)
-
     const multiplyAll = (acc, polynomial) => acc.multiply(polynomial)
 
     const [b0, ...bs] = this.getBs()
     const polynomials = init(this.points)
       .map(point => new Polynomial([-point.x, 1]))
-      .map(steppedGroup)
+      .map(getListSlicesFromStart)
       .map(group => group.reduce(multiplyAll))
 
     return polynomials
@@ -50,7 +47,6 @@ class NewtonEvaluator {
                   / xMult(init(points))(last(points).x)
     }
 
-    return this.points
-      .map((point, index) => getB(this.points.slice(0, index + 1)))
+    return this.points.map(getListSlicesFromStart).map(getB)
   }
 }

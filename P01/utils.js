@@ -30,5 +30,7 @@ const debounce = (fn, delay) => {
 const init = arr => arr.slice(0, arr.length - 1)
 const last = arr => arr[arr.length - 1]
 
+const getListSlicesFromStart = (_, index, arr) => arr.slice(0, index + 1)
+
 const zip = (...rows) =>
   [...rows[0]].map((_, index) => rows.map(row => row[index]))
