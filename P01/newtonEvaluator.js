@@ -3,17 +3,6 @@
 class NewtonEvaluator {
   constructor(points) { this.points = points }
 
-  setPoints(points) {
-    // ToDo: If points are the same or only differ by one, use old Bs
-    // to calculate new Bs
-
-    // if (!points.includes(point)) {
-    //   points.push(point)
-    // }
-
-    this.points = points
-  }
-
   getPolynomial() {
     if (this.points.length === 1) return new Polynomial([this.points[0].y])
 
