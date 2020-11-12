@@ -37,8 +37,8 @@ class NewtonEvaluator {
     const P = (points) => {
       if (points.length === 1) return new Polynomial([points[0].y])
       else {
-        const current = init(points)
-        return P(current).add(pointProduct(current).multiply(getB(points)))
+        const rest = init(points)
+        return P(rest).add(pointProduct(rest).multiply(getB(points)))
       }
     }
 
