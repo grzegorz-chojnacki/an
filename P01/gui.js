@@ -95,7 +95,7 @@ const gui = new (class {
   fillInputs(points) {
     this.removeAllInputs()
 
-    points.reverse().forEach(this.spawnInput)
+    points.reverse().forEach(point => this.spawnInput(point))
     this.recalculate()
 
     this.inputList.lastChild.remove()
