@@ -31,6 +31,14 @@ $y_{i}$&1&11&19
 \\ \\
 Z warunku $P(0)=1$ mamy $ b_{0}=1,$ z $P(2)=11$ mamy $b_{1}=5,$ z $ P(3)=19 $ mamy $ b_{2}=1.$
 \\Stąd $P(x)=1+5(x-0)+1(x-0)(x-2)=x^{2}+3x+1.$
-\section{}
+\section{Opis implementacji algorytmu}
+Implementacja realizująca metodę Newtona.
+\subsubsection{Dane wejściowe}
+Na wejściu program pobiera od użytkownika wartości punktów \\$P_{j}(x,y), j=0,1,2,...,n$, gdzie 'Rok pomiarów' to x, a 'Przyrost $ CO_{2}$ [t]' to y. Realizacja wprowadzenia danych możliwa jest na dwa sposoby. Poprzez bezpośrednie wpisanie wartości lub zaimportowanie danych z pliku JSON.
+\subsubsection{Opis}
+Program wyświetla komunikat: 'Wprowadź listę punktów poniżej'. Jeśli zostały wprowadzone prawidłowe dane, to na bieżąco wyświetlany jest odpowiedni wielomian. 
+W przypadku ręcznego wprowadzenia nieprawidłowych danych, które weryfikowane są w programie poprzez funkcję getPoints(), input podświetlony jest na czerwono.
+Dane dostarczone z pliku JSON program sprawdza poprzez funkcję parsePoints() oraz wyświetla komunikat "Błąd wczytywania pliku" w przypadku niepowodzenia.
+............
 %file:///C:/Users/HP/AppData/Local/Temp/W1_Interpolacja%20wielomianowa.pdf
 \end{document}
