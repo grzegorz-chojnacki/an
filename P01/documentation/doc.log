@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.6.29) (preloaded format=pdflatex 2020.10.17)  16 NOV 2020 00:11
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.6.29) (preloaded format=pdflatex 2020.10.17)  16 NOV 2020 22:42
 entering extended mode
 **./doc.tex
 (doc.tex
@@ -206,7 +206,17 @@ Underfull \hbox (badness 10000) in paragraph at lines 26--34
 
 [1
 
-{C:/Users/HP/AppData/Local/MiKTeX/pdftex/config/pdftex.map}] [2] (doc.aux) ) 
+{C:/Users/HP/AppData/Local/MiKTeX/pdftex/config/pdftex.map}]
+Underfull \hbox (badness 10000) in paragraph at lines 39--47
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 39--47
+
+ []
+
+[2] (doc.aux) ) 
 Here is how much of TeX's memory you used:
  758 strings out of 480790
  12237 string characters out of 2907063
@@ -215,17 +225,16 @@ Here is how much of TeX's memory you used:
  569734 words of font info for 50 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
  24i,8n,27p,321b,196s stack positions out of 5000i,500n,10000p,200000b,50000s
-{C:
-/Program Files/MiKTeX/fonts/enc/dvips/lm/lm-rm.enc}{C:/Program Files/MiKTeX/fon
-ts/enc/dvips/lm/lm-mathsy.enc}{C:/Program Files/MiKTeX/fonts/enc/dvips/lm/lm-ma
-thit.enc}<C:/Program Files/MiKTeX/fonts/type1/public/lm/lmbx12.pfb><C:/Program 
-Files/MiKTeX/fonts/type1/public/lm/lmmi12.pfb><C:/Program Files/MiKTeX/fonts/ty
-pe1/public/lm/lmmi8.pfb><C:/Program Files/MiKTeX/fonts/type1/public/lm/lmr12.pf
-b><C:/Program Files/MiKTeX/fonts/type1/public/lm/lmr17.pfb><C:/Program Files/Mi
-KTeX/fonts/type1/public/lm/lmr6.pfb><C:/Program Files/MiKTeX/fonts/type1/public
-/lm/lmr8.pfb><C:/Program Files/MiKTeX/fonts/type1/public/lm/lmsy10.pfb><C:/Prog
-ram Files/MiKTeX/fonts/type1/public/lm/lmsy8.pfb>
-Output written on doc.pdf (2 pages, 145235 bytes).
+{C:/Program Files/MiKTeX/fonts/enc/dvips/lm/lm-rm.enc}{C:/Progra
+m Files/MiKTeX/fonts/enc/dvips/lm/lm-mathsy.enc}{C:/Program Files/MiKTeX/fonts/
+enc/dvips/lm/lm-mathit.enc}<C:/Program Files/MiKTeX/fonts/type1/public/lm/lmbx1
+2.pfb><C:/Program Files/MiKTeX/fonts/type1/public/lm/lmmi12.pfb><C:/Program Fil
+es/MiKTeX/fonts/type1/public/lm/lmmi8.pfb><C:/Program Files/MiKTeX/fonts/type1/
+public/lm/lmr12.pfb><C:/Program Files/MiKTeX/fonts/type1/public/lm/lmr17.pfb><C
+:/Program Files/MiKTeX/fonts/type1/public/lm/lmr6.pfb><C:/Program Files/MiKTeX/
+fonts/type1/public/lm/lmr8.pfb><C:/Program Files/MiKTeX/fonts/type1/public/lm/l
+msy10.pfb><C:/Program Files/MiKTeX/fonts/type1/public/lm/lmsy8.pfb>
+Output written on doc.pdf (2 pages, 146271 bytes).
 PDF statistics:
  48 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)

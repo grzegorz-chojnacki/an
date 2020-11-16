@@ -38,7 +38,10 @@ Na wejściu program pobiera od użytkownika wartości punktów \\$P_{j}(x,y), j=
 \subsubsection{Opis}
 Program wyświetla komunikat: 'Wprowadź listę punktów poniżej'. Jeśli zostały wprowadzone prawidłowe dane, to na bieżąco wyświetlany jest odpowiedni wielomian. 
 W przypadku ręcznego wprowadzenia nieprawidłowych danych, które weryfikowane są w programie poprzez funkcję getPoints(), input podświetlony jest na czerwono.
-Dane dostarczone z pliku JSON program sprawdza poprzez funkcję parsePoints() oraz wyświetla komunikat "Błąd wczytywania pliku" w przypadku niepowodzenia.
-............
+Dane dostarczone z pliku JSON program sprawdza poprzez funkcję parsePoints() oraz wyświetla komunikat "Błąd wczytywania pliku" w przypadku niepowodzenia.\\\\
+Następnie funkcja recalculate() zajmuje się przekazaniem punktów, w celu dalszego rachunku, a także wyświetleniem wyniku.\\
+Funkcja klasy NewtonEvaluator zwraca wielomian, licząc wcześniej niewiadome b0, b1...; mając tylko jeden punkt zwracana jest od razu wartość y. W przeciwnym wypadku zwracany jest poszczególny y pomniejszony o poprzednie niewiadome, każda wymnożona razy różnice ...
+\\ \\
+Wynikiem działania programu jest wielomian interpolacyjny obrazujący oszacowanie tempa przyrostu dwutlenku węgla.
 %file:///C:/Users/HP/AppData/Local/Temp/W1_Interpolacja%20wielomianowa.pdf
 \end{document}
