@@ -1,5 +1,14 @@
 'use strict';
 
+Chart.pluginService.register({
+  beforeInit: chart => {
+    const data = chart.config.data
+
+    data.datasets[0].data = data.labels
+      .map(data.datasets[0].function)
+  }
+})
+
 const gui = new (class {
   canvas    = document.getElementById('canvas')
   formula   = document.getElementById('formula')
@@ -14,8 +23,6 @@ const gui = new (class {
 
   recalculate() {
     const points = this.getPoints()
-      .filter(point => Number.isFinite(point.x) && Number.isFinite(point.y))
-      .sort((a, b) => a.x - b.x)
 
     if (points.length === 0) return
 
@@ -26,37 +33,16 @@ const gui = new (class {
 
     const data = {
       labels: points.map(point => point.x),
-      datasets: [
-        {
-          label: `P(x) = ${polynomial.toString()}`,
-          function: (x) => polynomial.at(x),
-          borderColor: "#9966ff",
-          data: [],
-          fill: false
-        }
-      ]
+      datasets: [{
+        label: `P(x) = ${polynomial.toString()}`,
+        borderColor: "#9966ff",
+        function: x => polynomial.at(x),
+        data: [],
+        fill: false
+      }]
     }
 
-
-    Chart.pluginService.register({
-      beforeInit: function(chart) {
-        const data = chart.config.data
-        for (let i = 0; i < data.datasets.length; i++) {
-          for (let j = 0; j < data.labels.length; j++) {
-            let fct = data.datasets[i].function,
-              x = data.labels[j],
-              y = fct(x)
-            data.datasets[i].data.push(y)
-          }
-        }
-      }
-    })
-
-    new Chart(canvas, {
-      type: 'line',
-      data: data,
-
-    })
+    new Chart(canvas, { type: 'line', data })
   }
 
   update = debounce(() => this.recalculate(), 1000)
@@ -97,6 +83,8 @@ const gui = new (class {
         x: parseFloat(container.year.value),
         y: parseFloat(container.delta.value)
       }))
+      .filter(point => Number.isFinite(point.x) && Number.isFinite(point.y))
+      .sort((a, b) => a.x - b.x)
   }
 
   printFormula(polynomial) {
