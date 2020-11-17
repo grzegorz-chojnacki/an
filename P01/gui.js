@@ -1,22 +1,8 @@
 'use strict';
 
-Chart.pluginService.register({
-  beforeInit: chart => {
-    const data = chart.config.data
-
-    data.datasets[0].data = data.labels
-      .map(data.datasets[0].function)
-  }
-})
-
 const gui = new (class {
-  chart = new Chart(canvas.getContext('2d'), {
-    type: 'line',
-    data: {
-      datasets: [{ label: 'P(x)', function: () => {}, borderColor: "#9966ff" }]
-    }
-  })
   canvas    = document.getElementById('canvas')
+  chart     = new Chart(canvas.getContext('2d'), { type: 'line' })
   formula   = document.getElementById('formula')
   inputList = document.getElementById('inputList')
   fileInput = document.getElementById('fileInput')
@@ -37,20 +23,25 @@ const gui = new (class {
 
     this.printFormula(polynomial)
 
-    const data = {
-      labels: range(head(points).x, last(points).x),
-      datasets: [{
-        label: `P(x) = ${polynomial.toString()}`,
-        borderColor: "#9966ff",
-        function: x => polynomial.at(x),
-        data: [],
-        fill: false,
-      }]
-    }
-
     if (this.chart !== null) { this.chart.destroy() }
 
-    this.chart = new Chart(canvas.getContext('2d'), { type: 'line', data })
+    const xs = points.map(point => point.x)
+    const moreXs = range(head(xs), last(xs))
+
+    this.chart = new Chart(canvas.getContext('2d'), {
+      type: 'line',
+      data: {
+        labels: moreXs,
+        datasets: [{
+          label: `P(x) = ${polynomial.toString()}`,
+          borderColor: "#9966ff",
+          // lineTension: 0,
+          // pointRadius: 0,
+          data: moreXs.map(x => polynomial.at(x)),
+          fill: false,
+        }]
+      }
+    })
   }
 
   update = debounce(() => this.recalculate(), 1000)

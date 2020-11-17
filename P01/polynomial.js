@@ -65,7 +65,7 @@ class Polynomial {
   toString() {
     const fullSign    = n => n >= 0 ? ' + ' : ' - '
     const minimalSign = n => n >= 0 ? ''    : '-'
-    const simplify    = n => Math.abs(n)
+    const simplify    = n => Math.abs(trimInsignificantDecimals(n))
     const withoutOne  = n => simplify(n) === 1 ? '' : simplify(n)
 
     const format = (term, power, signFormat, oneSimplification) => (term !== 0)
