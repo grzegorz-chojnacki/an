@@ -65,7 +65,7 @@ class Polynomial {
   toString() {
     const fullSign    = n => n >= 0 ? ' + ' : ' - '
     const minimalSign = n => n >= 0 ? ''    : '-'
-    const toFixed2    = n => Mathfloor(n * 100) / 100
+    const toFixed2    = n => Math.floor(n * 100) / 100
     const simplify    = n => Math.abs(toFixed2(n))
     const withoutOne  = n => Math.abs(n) === 1 ? '' : simplify(n)
 

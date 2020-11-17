@@ -45,3 +45,11 @@ const getListSlicesFromStart = (_, index, arr) => arr.slice(0, index + 1)
 
 const zip = (...rows) =>
   [...rows[0]].map((_, index) => rows.map(row => row[index]))
+
+const range = (a, b, step = 1) => {
+  const rangeHelper = (head, tail) => head > b
+    ? tail
+    : rangeHelper(head + step, [head, ...tail])
+
+  return rangeHelper(a, []).reverse()
+}
