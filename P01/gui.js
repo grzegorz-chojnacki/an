@@ -14,12 +14,49 @@ const gui = new (class {
 
   recalculate() {
     const points = this.getPoints()
-      .filter(point => point.x && point.y)
+      .filter(point => Number.isFinite(point.x) && Number.isFinite(point.y))
+      .sort((a, b) => a.x - b.x)
+
+    if (points.length === 0) return
 
     const evaluator = new NewtonEvaluator(points)
-
     const polynomial = evaluator.getPolynomial()
+
     this.printFormula(polynomial)
+
+    const data = {
+      labels: points.map(point => point.x),
+      datasets: [
+        {
+          label: `P(x) = ${polynomial.toString()}`,
+          function: (x) => polynomial.at(x),
+          borderColor: "#9966ff",
+          data: [],
+          fill: false
+        }
+      ]
+    }
+
+
+    Chart.pluginService.register({
+      beforeInit: function(chart) {
+        const data = chart.config.data
+        for (let i = 0; i < data.datasets.length; i++) {
+          for (let j = 0; j < data.labels.length; j++) {
+            let fct = data.datasets[i].function,
+              x = data.labels[j],
+              y = fct(x)
+            data.datasets[i].data.push(y)
+          }
+        }
+      }
+    })
+
+    new Chart(canvas, {
+      type: 'line',
+      data: data,
+
+    })
   }
 
   update = debounce(() => this.recalculate(), 1000)
