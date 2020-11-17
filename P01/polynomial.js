@@ -65,19 +65,20 @@ class Polynomial {
   toString() {
     const fullSign    = n => n >= 0 ? ' + ' : ' - '
     const minimalSign = n => n >= 0 ? ''    : '-'
-    const simplifyOne = n => Math.abs(n) === 1 ? '' : n
-    const saveOne     = n => n
+    const toFixed2    = n => Math.floor(n * 100) / 100
+    const withoutOne  = n => Math.abs(n) === 1 ? '' : Math.abs(toFixed2(n))
+    const withOne     = n => Math.abs(toFixed2(n))
 
     const format = (term, power, signFormat, oneSimplification) => (term !== 0)
       ? formatTerm(term, signFormat, oneSimplification) + formatPower(power)
       : ''
 
     const formatTerm  = (term, signFormat, oneSimplification) =>
-      signFormat(term) + oneSimplification(Math.abs(term))
+      signFormat(term) + oneSimplification(term)
 
-    const formatFreeTerm = term => format(term, 0, fullSign, saveOne)
+    const formatFreeTerm = term => format(term, 0, fullSign, withOne)
     const formatHighestTerm = term =>
-      format(term, this.terms.length - 1, minimalSign, simplifyOne)
+      format(term, this.terms.length - 1, minimalSign, withoutOne)
 
     const formatPower = power => (power > 1)
       ? `x^${power}`
@@ -88,7 +89,7 @@ class Polynomial {
       const highestTerm = terms.pop()
 
       return formatHighestTerm(highestTerm) + terms
-        .map((term, index) => format(term, index + 1, fullSign, simplifyOne))
+        .map((term, index) => format(term, index + 1, fullSign, withoutOne))
         .reduce((acc, term) => term + acc, formatFreeTerm(freeTerm))
     } else return this.terms[0].toString()
   }
