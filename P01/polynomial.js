@@ -65,9 +65,9 @@ class Polynomial {
   toString() {
     const fullSign    = n => n >= 0 ? ' + ' : ' - '
     const minimalSign = n => n >= 0 ? ''    : '-'
-    const toFixed2    = n => Math.floor(n * 100) / 100
-    const withoutOne  = n => Math.abs(n) === 1 ? '' : Math.abs(toFixed2(n))
-    const withOne     = n => Math.abs(toFixed2(n))
+    const toFixed2    = n => Mathfloor(n * 100) / 100
+    const simplify    = n => Math.abs(toFixed2(n))
+    const withoutOne  = n => Math.abs(n) === 1 ? '' : simplify(n)
 
     const format = (term, power, signFormat, oneSimplification) => (term !== 0)
       ? formatTerm(term, signFormat, oneSimplification) + formatPower(power)
@@ -76,7 +76,7 @@ class Polynomial {
     const formatTerm  = (term, signFormat, oneSimplification) =>
       signFormat(term) + oneSimplification(term)
 
-    const formatFreeTerm = term => format(term, 0, fullSign, withOne)
+    const formatFreeTerm = term => format(term, 0, fullSign, simplify)
     const formatHighestTerm = term =>
       format(term, this.terms.length - 1, minimalSign, withoutOne)
 
