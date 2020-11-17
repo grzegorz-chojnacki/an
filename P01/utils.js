@@ -35,10 +35,18 @@ const debounce = (fn, delay) => {
   }
 }
 
+const trimInsignificantDecimals = (x, precision = 100) => {
+  const result = Math.round(x * precision) / precision
+  if (result !== 0) return result
+  else return round(x, precision * 10)
+}
+
 // Collections
 const pairSum = ([first = 0, second = 0]) => first + second
 
 const init = arr => arr.slice(0, arr.length - 1)
+const head = ([head, ...tail]) => head
+const tail = ([head, ...tail]) => tail
 const last = arr => arr[arr.length - 1]
 
 const getListSlicesFromStart = (_, index, arr) => arr.slice(0, index + 1)

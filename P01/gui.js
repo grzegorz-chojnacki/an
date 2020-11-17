@@ -10,7 +10,12 @@ Chart.pluginService.register({
 })
 
 const gui = new (class {
-  chart     = null
+  chart = new Chart(canvas.getContext('2d'), {
+    type: 'line',
+    data: {
+      datasets: [{ label: 'P(x)', function: () => {}, borderColor: "#9966ff" }]
+    }
+  })
   canvas    = document.getElementById('canvas')
   formula   = document.getElementById('formula')
   inputList = document.getElementById('inputList')
@@ -33,7 +38,7 @@ const gui = new (class {
     this.printFormula(polynomial)
 
     const data = {
-      labels: range(points[0].x, last(points).x),
+      labels: range(head(points).x, last(points).x),
       datasets: [{
         label: `P(x) = ${polynomial.toString()}`,
         borderColor: "#9966ff",
@@ -43,7 +48,7 @@ const gui = new (class {
       }]
     }
 
-    if (this.chart !== null) this.chart.destroy()
+    if (this.chart !== null) { this.chart.destroy() }
 
     this.chart = new Chart(canvas.getContext('2d'), { type: 'line', data })
   }
@@ -108,13 +113,13 @@ const gui = new (class {
     if (event.target.files.length > 0) {
       const file = event.target.files.item(0)
       const points = this.parsePoints(await file.text())
+
       this.fillInputs(points)
     }
   }
 
   parsePoints(fileContents) {
     try {
-      // ToDo: Check if property x, y exists, not null
       return JSON.parse(fileContents)
     } catch (err) { this.formula.innerHTML = "Błąd wczytywania pliku" }
     return []
@@ -123,12 +128,11 @@ const gui = new (class {
   fillInputs(points) {
     this.removeAllInputs()
 
-    points.reverse().forEach(point => this.spawnInput(point))
-    this.recalculate()
+    if (points.length > 0) {
+      points.reverse().forEach(point => this.spawnInput(point))
+      this.recalculate()
 
-    this.inputList.lastChild.remove()
+      this.inputList.lastChild.remove()
+    }
   }
-
-  // TODO: Implement function to draw polynomial on canvas
-  drawFunction(polynomial) { }
 })()
