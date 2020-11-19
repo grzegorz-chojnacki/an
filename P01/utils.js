@@ -38,7 +38,7 @@ const debounce = (fn, delay) => {
 const trimInsignificantDecimals = (x, precision = 100) => {
   const result = Math.round(x * precision) / precision
   if (result !== 0) return result
-  else return round(x, precision * 10)
+  else return Math.round(x, precision * 10)
 }
 
 // Collections

@@ -39,7 +39,6 @@ class NewtonEvaluator {
       }
     })
 
-    const x =  this.points.map(getListSlicesFromStart).map(getB)
-    return x
+    return this.points.map(getListSlicesFromStart).map(getB)
   }
 }

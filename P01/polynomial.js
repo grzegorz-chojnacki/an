@@ -36,8 +36,8 @@ class Polynomial {
 
   addPolynomial(that) {
     const [longer, shorter] = (this.terms.length >= that.terms.length)
-    ? [this, that]
-    : [that, this]
+      ? [this, that]
+      : [that, this]
 
     // Zipping shorter list with longer will cut excesive elements
     // Order is important
