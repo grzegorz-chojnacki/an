@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.6.29) (preloaded format=pdflatex 2020.10.17)  17 NOV 2020 22:50
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.6.29) (preloaded format=pdflatex 2020.10.17)  20 NOV 2020 00:10
 entering extended mode
 **./doc.tex
 (doc.tex
@@ -120,6 +120,30 @@ Package: tabto 2018/12/28  v 1.4  Another tabbing mechanism
 ("C:\Program Files\MiKTeX\tex/latex/tools\indentfirst.sty"
 Package: indentfirst 1995/11/23 v1.03 Indent first paragraph (DPC)
 )
+("C:\Program Files\MiKTeX\tex/latex/graphics\graphicx.sty"
+Package: graphicx 2019/11/30 v1.2a Enhanced LaTeX Graphics (DPC,SPQR)
+
+("C:\Program Files\MiKTeX\tex/latex/graphics\keyval.sty"
+Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
+\KV@toks@=\toks17
+)
+("C:\Program Files\MiKTeX\tex/latex/graphics\graphics.sty"
+Package: graphics 2019/11/30 v1.4a Standard LaTeX Graphics (DPC,SPQR)
+
+("C:\Program Files\MiKTeX\tex/latex/graphics\trig.sty"
+Package: trig 2016/01/03 v1.10 sin cos tan (DPC)
+)
+("C:\Program Files\MiKTeX\tex/latex/graphics-cfg\graphics.cfg"
+File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
+)
+Package graphics Info: Driver file: pdftex.def on input line 105.
+
+("C:\Program Files\MiKTeX\tex/latex/graphics-def\pdftex.def"
+File: pdftex.def 2018/01/08 v1.0l Graphics/color driver for pdftex
+))
+\Gin@req@height=\dimen137
+\Gin@req@width=\dimen138
+)
 ("C:\Program Files\MiKTeX\tex/latex/l3backend\l3backend-pdfmode.def"
 File: l3backend-pdfmode.def 2020-06-29 L3 backend support: PDF mode
 \l__kernel_color_stack_int=\count175
@@ -127,65 +151,83 @@ File: l3backend-pdfmode.def 2020-06-29 L3 backend support: PDF mode
 ) (doc.aux)
 \openout1 = `doc.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 10.
-LaTeX Font Info:    ... okay on input line 10.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 10.
-LaTeX Font Info:    ... okay on input line 10.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 10.
-LaTeX Font Info:    ... okay on input line 10.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 10.
-LaTeX Font Info:    ... okay on input line 10.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 10.
-LaTeX Font Info:    ... okay on input line 10.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 10.
-LaTeX Font Info:    ... okay on input line 10.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 10.
-LaTeX Font Info:    ... okay on input line 10.
-LaTeX Font Info:    Checking defaults for OT4/cmr/m/n on input line 10.
-LaTeX Font Info:    ... okay on input line 10.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 11.
+LaTeX Font Info:    ... okay on input line 11.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 11.
+LaTeX Font Info:    ... okay on input line 11.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 11.
+LaTeX Font Info:    ... okay on input line 11.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 11.
+LaTeX Font Info:    ... okay on input line 11.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 11.
+LaTeX Font Info:    ... okay on input line 11.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 11.
+LaTeX Font Info:    ... okay on input line 11.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 11.
+LaTeX Font Info:    ... okay on input line 11.
+LaTeX Font Info:    Checking defaults for OT4/cmr/m/n on input line 11.
+LaTeX Font Info:    ... okay on input line 11.
 LaTeX Font Info:    Trying to load font information for OT4+lmr on input line 1
-0.
+1.
 ("C:\Program Files\MiKTeX\tex/latex/lm\ot4lmr.fd"
 File: ot4lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
+("C:\Program Files\MiKTeX\tex/context/base/mkii\supp-pdf.mkii"
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count176
+\scratchdimen=\dimen139
+\scratchbox=\box46
+\nofMPsegments=\count177
+\nofMParguments=\count178
+\everyMPshowfont=\toks18
+\MPscratchCnt=\count179
+\MPscratchDim=\dimen140
+\MPnumerator=\count180
+\makeMPintoPDFobject=\count181
+\everyMPtoPDFconversion=\toks19
+) ("C:\Program Files\MiKTeX\tex/latex/epstopdf-pkg\epstopdf-base.sty"
+Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
+Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
+85.
+)
 LaTeX Font Info:    Trying to load font information for OT1+lmr on input line 1
-1.
+2.
 
 ("C:\Program Files\MiKTeX\tex/latex/lm\ot1lmr.fd"
 File: ot1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OML+lmm on input line 1
-1.
+2.
 
 ("C:\Program Files\MiKTeX\tex/latex/lm\omllmm.fd"
 File: omllmm.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OMS+lmsy on input line 
-11.
+12.
 
 ("C:\Program Files\MiKTeX\tex/latex/lm\omslmsy.fd"
 File: omslmsy.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OMX+lmex on input line 
-11.
+12.
 
 ("C:\Program Files\MiKTeX\tex/latex/lm\omxlmex.fd"
 File: omxlmex.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <14.4> on input line 11.
+(Font)              <14.4> on input line 12.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10> on input line 11.
+(Font)              <10> on input line 12.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <7> on input line 11.
+(Font)              <7> on input line 12.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <12> on input line 17.
+(Font)              <12> on input line 18.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <8> on input line 17.
+(Font)              <8> on input line 18.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <6> on input line 17.
+(Font)              <6> on input line 18.
 
-Overfull \hbox (26.73032pt too wide) in paragraph at lines 21--22
+Overfull \hbox (26.73032pt too wide) in paragraph at lines 22--23
 []\OT1/lmr/m/n/12 Maj¡c za-da-ny ukªad punk-tów $\OMS/lmsy/m/n/12 f\OT1/lmr/m/n
 /12 (\OML/lmm/m/it/12 x[]; y[]\OT1/lmr/m/n/12 )\OML/lmm/m/it/12 ; j \OT1/lmr/m/
 n/12 = 0\OML/lmm/m/it/12 ; \OT1/lmr/m/n/12 1\OML/lmm/m/it/12 ; \OT1/lmr/m/n/12 
@@ -194,59 +236,226 @@ n/12 = 0\OML/lmm/m/it/12 ; \OT1/lmr/m/n/12 1\OML/lmm/m/it/12 ; \OT1/lmr/m/n/12
  []
 
 
-Overfull \hbox (15.64964pt too wide) in paragraph at lines 22--25
+Overfull \hbox (15.64964pt too wide) in paragraph at lines 23--26
 \OT1/lmr/m/n/12 Z wy-»ej wy-mie-nio-nych wa-run-ków otrzy-ma-my ukªad z nie-wia
 -do-my-mi $\OML/lmm/m/it/12 b[]; b[]; :::; b[]:$
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 26--34
+Underfull \hbox (badness 10000) in paragraph at lines 27--35
 
  []
 
 [1
 
 {C:/Users/HP/AppData/Local/MiKTeX/pdftex/config/pdftex.map}]
-Underfull \hbox (badness 10000) in paragraph at lines 42--44
+Underfull \hbox (badness 10000) in paragraph at lines 43--45
 
  []
 
 LaTeX Font Info:    Trying to load font information for TS1+lmr on input line 4
-7.
+8.
 ("C:\Program Files\MiKTeX\tex/latex/lm\ts1lmr.fd"
 File: ts1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 ) [2]
-Underfull \hbox (badness 10000) in paragraph at lines 73--74
+Underfull \hbox (badness 10000) in paragraph at lines 75--76
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 83--87
+Overfull \hbox (2.8441pt too wide) in paragraph at lines 76--81
+\OT1/lmr/m/n/12 Funkcja \OT4/lmr/m/it/12 get-Po-ly-no-mial \OT1/lmr/m/n/12 kla-
+sy \OT4/lmr/m/it/12 New-to-nE-va-lu-ator \OT1/lmr/m/n/12 zwra-ca wie-lo-mian, l
+i-cz¡c wcze-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 76--81
 
  []
 
-[3] (doc.aux) ) 
+[3]
+Underfull \hbox (badness 10000) in paragraph at lines 81--82
+
+ []
+
+
+Overfull \hbox (29.32259pt too wide) detected at line 82
+\OML/lmm/m/it/12 P\OT1/lmr/m/n/12 (\OML/lmm/m/it/12 x[]\OT1/lmr/m/n/12 ) = \OML
+/lmm/m/it/12 b[] \OMS/lmsy/m/n/12   \OML/lmm/m/it/12 b[]\OT1/lmr/m/n/12 (\OML/l
+mm/m/it/12 x[] \OMS/lmsy/m/n/12   \OML/lmm/m/it/12 x[]\OT1/lmr/m/n/12 ) \OMS/lm
+sy/m/n/12   \OML/lmm/m/it/12 b[]\OT1/lmr/m/n/12 (\OML/lmm/m/it/12 x[] \OMS/lmsy
+/m/n/12   \OML/lmm/m/it/12 x[]\OT1/lmr/m/n/12 )(\OML/lmm/m/it/12 x[] \OMS/lmsy/
+m/n/12   \OML/lmm/m/it/12 x[]\OT1/lmr/m/n/12 ) \OMS/lmsy/m/n/12   \OML/lmm/m/it
+/12 ::: \OMS/lmsy/m/n/12   \OML/lmm/m/it/12 b[]\OT1/lmr/m/n/12 (\OML/lmm/m/it/1
+2 x[] \OMS/lmsy/m/n/12   \OML/lmm/m/it/12 x[]\OT1/lmr/m/n/12 )(\OML/lmm/m/it/12
+ x[] \OMS/lmsy/m/n/12   \OML/lmm/m/it/12 x[]\OT1/lmr/m/n/12 )\OML/lmm/m/it/12 :
+::\OT1/lmr/m/n/12 (\OML/lmm/m/it/12 x[] \OMS/lmsy/m/n/12   \OML/lmm/m/it/12 x[]
+\OT1/lmr/m/n/12 )
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 88--92
+
+ []
+
+LaTeX Font Info:    Trying to load font information for OT4+lmtt on input line 
+95.
+("C:\Program Files\MiKTeX\tex/latex/lm\ot4lmtt.fd"
+File: ot4lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
+)
+Overfull \hbox (73.12523pt too wide) in paragraph at lines 141--141
+[]    \OT4/lmtt/m/n/12 if (this.points.length === 1) return new Polynomial([thi
+s.points[0].y])[] 
+ []
+
+[4]
+Overfull \hbox (11.3752pt too wide) in paragraph at lines 141--141
+[]      \OT4/lmtt/m/n/12 .map((polynomial, index) => polynomial.multiply(bs[ind
+ex]))[] 
+ []
+
+
+Overfull \hbox (23.7252pt too wide) in paragraph at lines 141--141
+[]      \OT4/lmtt/m/n/12 if (points.length === 1) return new Polynomial([points
+[0].y])[] 
+ []
+
+
+Overfull \hbox (36.07521pt too wide) in paragraph at lines 141--141
+[]        \OT4/lmtt/m/n/12 return P(rest).add(pointProduct(rest).multiply(getB(
+points)))[] 
+ []
+
+[5]
+Overfull \hbox (5.2002pt too wide) in paragraph at lines 207--207
+[]  \OT4/lmtt/m/n/12 static product = (acc, polynomial) => acc.multiply(polynom
+ial)[] 
+ []
+
+
+Overfull \hbox (11.3752pt too wide) in paragraph at lines 207--207
+[]    \OT4/lmtt/m/n/12 if (terms.length === 0) throw new Error('Term list is em
+pty')[] 
+ []
+
+
+Overfull \hbox (5.2002pt too wide) in paragraph at lines 207--207
+[]    \OT4/lmtt/m/n/12 return this.terms.reduceRight((acc, term) => acc * x + t
+erm)[] 
+ []
+
+[6]
+Overfull \hbox (42.25021pt too wide) in paragraph at lines 207--207
+[]    \OT4/lmtt/m/n/12 const [longer, shorter] = (this.terms.length >= that.ter
+ms.length)[] 
+ []
+
+
+Overfull \hbox (29.9002pt too wide) in paragraph at lines 207--207
+[]    \OT4/lmtt/m/n/12 const addedTerms = zip(longer.terms, shorter.terms).map(
+pairSum)[] 
+ []
+
+
+Overfull \hbox (79.30023pt too wide) in paragraph at lines 207--207
+[]    \OT4/lmtt/m/n/12 const padLeft = (arr, padding) => new Array(padding).fil
+l(0).concat(arr)[] 
+ []
+
+
+Overfull \hbox (54.60022pt too wide) in paragraph at lines 207--207
+[]      \OT4/lmtt/m/n/12 const multiplied = that.terms.map(thatTerm => thatTerm
+ * thisTerm)[] 
+ []
+
+
+Overfull \hbox (91.65024pt too wide) in paragraph at lines 207--207
+[]    \OT4/lmtt/m/n/12 if (typeof that === "number") return this.multiply(new P
+olynomial([that]))[] 
+ []
+
+<errorPic.jpg, id=32, 612.03656pt x 414.04688pt>
+File: errorPic.jpg Graphic file (type jpg)
+<use errorPic.jpg>
+Package pdftex.def Info: errorPic.jpg  used on input line 213.
+(pdftex.def)             Requested size: 397.81905pt x 269.12727pt.
+
+Overfull \hbox (7.81905pt too wide) in paragraph at lines 213--214
+ [][] 
+ []
+
+<wrongInput.jpg, id=33, 642.90187pt x 453.94594pt>
+File: wrongInput.jpg Graphic file (type jpg)
+<use wrongInput.jpg>
+Package pdftex.def Info: wrongInput.jpg  used on input line 219.
+(pdftex.def)             Requested size: 417.88126pt x 295.06136pt.
+
+Overfull \hbox (27.88126pt too wide) in paragraph at lines 219--220
+ [][] 
+ []
+
+<emptyInput.jpg, id=34, 618.05907pt x 450.9347pt>
+File: emptyInput.jpg Graphic file (type jpg)
+<use emptyInput.jpg>
+Package pdftex.def Info: emptyInput.jpg  used on input line 224.
+(pdftex.def)             Requested size: 401.73363pt x 293.10408pt.
+
+Overfull \hbox (11.73363pt too wide) in paragraph at lines 224--225
+ [][] 
+ []
+
+<duplicate.jpg, id=35, 603.75563pt x 435.87843pt>
+File: duplicate.jpg Graphic file (type jpg)
+<use duplicate.jpg>
+Package pdftex.def Info: duplicate.jpg  used on input line 230.
+(pdftex.def)             Requested size: 392.43651pt x 283.31761pt.
+
+Overfull \hbox (2.43651pt too wide) in paragraph at lines 230--231
+ [][] 
+ []
+
+<correctEasyData.jpg, id=36, 598.48593pt x 450.18187pt>
+File: correctEasyData.jpg Graphic file (type jpg)
+<use correctEasyData.jpg>
+Package pdftex.def Info: correctEasyData.jpg  used on input line 236.
+(pdftex.def)             Requested size: 389.01125pt x 292.61475pt.
+<correctRealData.jpg, id=37, 608.2725pt x 442.65375pt>
+File: correctRealData.jpg Graphic file (type jpg)
+<use correctRealData.jpg>
+Package pdftex.def Info: correctRealData.jpg  used on input line 242.
+(pdftex.def)             Requested size: 395.37245pt x 287.72151pt.
+
+Overfull \hbox (5.37245pt too wide) in paragraph at lines 242--243
+ [][] 
+ []
+
+[7] [8 <./errorPic.jpg>] [9 <./wrongInput.jpg>] [10 <./emptyInput.jpg>]
+[11 <./duplicate.jpg>] [12 <./correctEasyData.jpg>] [13 <./correctRealData.jpg>
+] (doc.aux) ) 
 Here is how much of TeX's memory you used:
- 790 strings out of 480790
- 13057 string characters out of 2907063
- 244876 words of memory out of 3000000
- 16820 multiletter control sequences out of 15000+200000
- 570109 words of font info for 51 fonts, out of 3000000 for 9000
+ 1630 strings out of 480790
+ 24527 string characters out of 2907063
+ 257256 words of memory out of 3000000
+ 17617 multiletter control sequences out of 15000+200000
+ 574637 words of font info for 53 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 24i,8n,27p,321b,229s stack positions out of 5000i,500n,10000p,200000b,50000s
-{C:/Program Files/MiKTeX/fonts/enc/dvips/lm/lm-ts1.enc}{C:/Progr
-am Files/MiKTeX/fonts/enc/dvips/lm/lm-rm.enc}{C:/Program Files/MiKTeX/fonts/enc
-/dvips/lm/lm-mathsy.enc}{C:/Program Files/MiKTeX/fonts/enc/dvips/lm/lm-mathit.e
-nc}<C:/Program Files/MiKTeX/fonts/type1/public/lm/lmbx12.pfb><C:/Program Files/
-MiKTeX/fonts/type1/public/lm/lmmi12.pfb><C:/Program Files/MiKTeX/fonts/type1/pu
-blic/lm/lmmi8.pfb><C:/Program Files/MiKTeX/fonts/type1/public/lm/lmr12.pfb><C:/
-Program Files/MiKTeX/fonts/type1/public/lm/lmr17.pfb><C:/Program Files/MiKTeX/f
-onts/type1/public/lm/lmr6.pfb><C:/Program Files/MiKTeX/fonts/type1/public/lm/lm
-r8.pfb><C:/Program Files/MiKTeX/fonts/type1/public/lm/lmsy10.pfb><C:/Program Fi
-les/MiKTeX/fonts/type1/public/lm/lmsy8.pfb>
-Output written on doc.pdf (3 pages, 152252 bytes).
+ 30i,8n,27p,513b,238s stack positions out of 5000i,500n,10000p,200000b,50000s
+{C:/Program Files/MiKTeX/fonts/enc/dvips/lm/lm-rmtt.enc}{C:/Progra
+m Files/MiKTeX/fonts/enc/dvips/lm/lm-ts1.enc}{C:/Program Files/MiKTeX/fonts/enc
+/dvips/lm/lm-rm.enc}{C:/Program Files/MiKTeX/fonts/enc/dvips/lm/lm-mathsy.enc}{
+C:/Program Files/MiKTeX/fonts/enc/dvips/lm/lm-mathit.enc}<C:/Program Files/MiKT
+eX/fonts/type1/public/lm/lmbx12.pfb><C:/Program Files/MiKTeX/fonts/type1/public
+/lm/lmmi12.pfb><C:/Program Files/MiKTeX/fonts/type1/public/lm/lmmi8.pfb><C:/Pro
+gram Files/MiKTeX/fonts/type1/public/lm/lmr12.pfb><C:/Program Files/MiKTeX/font
+s/type1/public/lm/lmr17.pfb><C:/Program Files/MiKTeX/fonts/type1/public/lm/lmr6
+.pfb><C:/Program Files/MiKTeX/fonts/type1/public/lm/lmr8.pfb><C:/Program Files/
+MiKTeX/fonts/type1/public/lm/lmri12.pfb><C:/Program Files/MiKTeX/fonts/type1/pu
+blic/lm/lmsy10.pfb><C:/Program Files/MiKTeX/fonts/type1/public/lm/lmsy8.pfb><C:
+/Program Files/MiKTeX/fonts/type1/public/lm/lmtt12.pfb>
+Output written on doc.pdf (13 pages, 493939 bytes).
 PDF statistics:
- 54 PDF objects out of 1000 (max. 8388607)
+ 102 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 1 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 31 words of extra memory for PDF output out of 10000 (max. 10000000)
 
