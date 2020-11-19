@@ -18,15 +18,22 @@ const gui = new (class {
 
     if (points.length === 0) return
 
-    const evaluator = new NewtonEvaluator(points)
-    const polynomial = evaluator.getPolynomial()
+    const xs = points.map(point => point.x)
+    const moreXs = range(head(xs), last(xs))
+
+    const isDuplicated = point =>
+      xs.indexOf(point.x) !== xs.lastIndexOf(point.x)
+
+    if (points.find(point => isDuplicated(point)) !== undefined) {
+      this.formula.innerHTML = 'Wykryto powtarzające się lata'
+      return
+    }
+
+    const polynomial = new NewtonEvaluator(points).getPolynomial()
 
     this.printFormula(polynomial)
 
     if (this.chart !== null) { this.chart.destroy() }
-
-    const xs = points.map(point => point.x)
-    const moreXs = range(head(xs), last(xs))
 
     this.chart = new Chart(canvas.getContext('2d'), {
       type: 'line',
@@ -35,8 +42,7 @@ const gui = new (class {
         datasets: [{
           label: `P(x) = ${polynomial.toString()}`,
           borderColor: "#9966ff",
-          // lineTension: 0,
-          // pointRadius: 0,
+          pointRadius: 0,
           data: moreXs.map(x => polynomial.at(x)),
           fill: false,
         }]
