@@ -83,13 +83,13 @@ $$P(x_{n})=b_{0}-b_{1}(x_n-x_{0})-b_2(x_n-x_0)(x_n-x_1)-...-b_{n-1}(x_n-x_0)(x_n
 
 Wykorzystywane są funkcje rekurencyjne \emph{getB} oraz \emph{P} , w których przypadkiem bazowym jest lista z jednym punktem, dla której zwracana jest wartość y tego punktu. W przeciwnym wypadku obie te funkcje dostają listę punktów do xn i wyliczają wyniki na podstawie powyższych wzorów. Korzystają z funkcji pomocnicznej \emph{pointProduct}, która przekształca listę punktów na listę wielomianów w postaci $x_n \rightarrow (x-x_n)$. Następnie wylicza ich iloczyn. 
 
-Aby wyznaczyć wielomian musimy zsumować niewiadomą $b_0$ i iloczyn pozostałych niewiadomych z odpowiadającymi im grupami wielomianowymi. ???
+Aby wyznaczyć wielomian musimy zsumować niewiadomą $b_0$ i iloczyn pozostałych niewiadomych z odpowiadającymi im grupami wielomianowymi. 
 
 Z uwagi na występowanie rekurencji i dużą powtarzalność wykonywanych operacji
 w najbardziej kluczowych fragmentach, wykorzystywana jest technika spamiętywania.
 \\ \\
 Wynikiem działania programu jest wielomian interpolacyjny () obrazujący oszacowanie tempa przyrostu dwutlenku węgla.
-
+\newpage
 \subsection{Najważniejsze fragmenty programu}
 newtonEvaluator.js
 \begin{verbatim}
@@ -206,9 +206,8 @@ class Polynomial {
 }
 \end{verbatim}
 
-
 \subsection{Widok działania programu}
-\begin{figure}
+\begin{figure}[h]
 \centering
 \includegraphics[scale=0.65]{errorPic.jpg}
 \caption{Błędne zaimportowanie pliku}
