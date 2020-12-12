@@ -1,6 +1,6 @@
 'use strict'
 
-class NewtonMethod {
+class SecantMethod {
   f = x => 4*x**3 + 5*x**2 + 6*x - 7
   interval = [0, 1]
 
