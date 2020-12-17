@@ -8,18 +8,10 @@ main {
   margin: 0 auto;
 }
 
-h3 { font-weight: normal }
-
-section { margin: 1em 0 }
-
-#formula { font-family: serif }
-
-input { padding: 0.5em }
-
-#error {
-  color: #bb3758;
-  font-style: italic;
-}
+th      { text-align: right   }
+h3      { font-weight: normal }
+input   { padding: 0.5em      }
+section { margin: 1em 0       }
 
 table {
   font-size: 1.5em;
@@ -30,4 +22,15 @@ em {
   font-size: 1rem;
   font-family: sans-serif;
   opacity: 0.5;
+}
+
+#formula {
+  text-align: center;
+  font-family: serif;
+  margin: 2em;
+}
+
+#error {
+  color: #bb3758;
+  font-style: italic;
 }
