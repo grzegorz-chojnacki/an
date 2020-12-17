@@ -1,4 +1,4 @@
-'use strict';
+'use strict'
 
 // Tests
 const expect = result => ({

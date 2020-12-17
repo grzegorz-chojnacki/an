@@ -1,53 +1,20 @@
 'use strict';
 
 const gui = new (class {
-  canvas    = document.getElementById('canvas')
-  chart     = new Chart(canvas.getContext('2d'), { type: 'line' })
-  formula   = document.getElementById('formula')
-  inputList = document.getElementById('inputList')
-  fileInput = document.getElementById('fileInput')
-  dataItemTemplate = `
-    <div class="data-item data-group">
-      <input type="number" onkeyup="gui.update()" name="year" step="1" placeholder="Rok">
-      <input type="number" onkeyup="gui.update()" name="delta" placeholder="Przyrost">
-      <button class="remove-button" onclick="gui.removeInput(this)">x</button>
-    </div>`
+  input  = document.getElementById('input')
+  result = document.getElementById('result')
+  steps  = document.getElementById('steps')
+  error  = document.getElementById('error')
 
   recalculate() {
-    const points = this.getPoints()
-
-    if (points.length === 0) return
-
-    const xs = points.map(point => point.x)
-    const moreXs = range(head(xs), last(xs))
-
-    const isDuplicated = point =>
-      xs.indexOf(point.x) !== xs.lastIndexOf(point.x)
-
-    if (points.find(point => isDuplicated(point)) !== undefined) {
-      this.formula.innerHTML = 'Wykryto powtarzające się lata'
-      return
+    const precision = this.getPrecision()
+    if (0 < precision && precision < 1) {
+      const answer = new SecantMethod(precision).calculate()
+      this.result.innerText = answer.result
+      this.steps.innerText  = answer.steps
+    } else {
+      this.error.innerText = 'Wprowadzona wartość poza przedziałem (0, 1)'
     }
-
-    const polynomial = new NewtonEvaluator(points).getPolynomial()
-
-    this.printFormula(polynomial)
-
-    if (this.chart !== null) { this.chart.destroy() }
-
-    this.chart = new Chart(canvas.getContext('2d'), {
-      type: 'line',
-      data: {
-        labels: moreXs,
-        datasets: [{
-          label: `P(x) = ${polynomial.toString()}`,
-          borderColor: "#9966ff",
-          pointRadius: 0,
-          data: moreXs.map(x => polynomial.at(x)),
-          fill: false,
-        }]
-      }
-    })
   }
 
   update = debounce(() => this.recalculate(), 1000)
@@ -79,6 +46,10 @@ const gui = new (class {
     inputs.forEach(node => this.inputList.removeChild(node))
 
     this.spawnInput()
+  }
+
+  getPrecision() {
+    return Number.parseFloat(this.input.value)
   }
 
   getPoints() {

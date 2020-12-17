@@ -13,7 +13,6 @@ class SecantMethod {
   calculate() {
     const g = (a, b, steps = 0) => {
       const next = this.getNext(a, b)
-      console.log(next)
       return this.isGoodEnough(next, b)
         ? ({ result: next, steps })
         : g(b, next, steps + 1)

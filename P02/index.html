@@ -6,26 +6,37 @@
   <title>Równania nieliniowe</title>
   <meta name='viewport' content='width=device-width, initial-scale=1'>
   <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.bundle.min.js"></script>
 </head>
-<body onload="console.log(new NewtonMethod(0.00001).calculate())">
+<body>
   <main>
     <header>
       <h1>Przybliżone rozwiązywanie równań nieliniowych</h1>
     </header>
 
+    <h2 id="formula">4x<sup>3</sup> &plus; 5x<sup>2</sup> &plus; 6x &minus; 7 = 0</h2>
+
     <section>
-      <h2 id="formula">Wprowadź dokładność rozwiązania &epsilon; &isin; (0, 1)</h2>
+      <h3>Wprowadź dokładność rozwiązania &epsilon; &isin; (0, 1)</h2>
+      <input id="input" type="number" placeholder="0.00001" onkeyup="gui.update()">
+      <span id="error"></span>
     </section>
 
     <section>
-      <label>Dokładność rozwiązania</label><br>
-      <input type="number" placeholder="Dokładność rozwiązania">
+      <table>
+        <tr>
+          <th>x<sub>k</sub>:</th>
+          <td id="result"><em>(rozwiązanie)</em></td>
+        </tr>
+        <tr>
+          <th>k:</th>
+          <td id="steps"><em>(ilość kroków)</em></td>
+        </tr>
+      </table>
     </section>
 
   </main>
 </body>
   <script src='utils.js'></script>
   <script src='gui.js'></script>
-  <script src='newtonMethod.js'></script>
+  <script src='secantMethod.js'></script>
 </html>
