@@ -42,8 +42,8 @@ Na wejściu program pobiera od użytkownika wartość wyrażającą dokładnoś�
 
 
 \subsection{Przebieg działania}
-Program wyświetla komunikat: 'Wprowadź dokładność rozwiązania $\epsilon \in(0,1)$ '. Jeśli została wprowadzona prawidłowa wartość dokładności, to program poprzez funkcję calculate wylicza przybliżone rozwiązanie i dzięki funkcji refresh wyświetla je wraz z liczbą kroków.
-Próba wprowadzenia nieprawidłowych danych, które weryfikowane są w programie w funkcji 'refresh' skutkuje wyświetleniem stosownego ostrzeżenia.
+Program wyświetla komunikat: 'Wprowadź dokładność rozwiązania $\epsilon \in(0,1)$ '. Jeśli została wprowadzona prawidłowa wartość dokładności, to program poprzez funkcję \emph{calculate} wylicza przybliżone rozwiązanie i dzięki funkcji \emph{refresh} wyświetla je wraz z liczbą kroków.
+Próba wprowadzenia nieprawidłowych danych, które weryfikowane są w programie w funkcji \emph{refresh} skutkuje wyświetleniem stosownego ostrzeżenia.
 \par Następnie funkcja \emph{calculate} klasy \emph{SecantMethod} zajmuje się wyliczeniem przybliżonego rozwiązania.\\
 Funkcja \emph{getNext}, której argumentami są $a$ i $b$ odpowiednio oznaczające $x_{k-1}$ oraz $x_{k}$ zwraca wartość poszczególnego $x_{k+1}$.
 \\
@@ -78,6 +78,7 @@ class SecantMethod {
 }
 
 \end{verbatim}
+\newpage
 gui.js
 \begin{verbatim}
 
@@ -107,42 +108,18 @@ const gui = new (class {
 
 })()
 \end{verbatim}
-
+\newpage
 \subsection{Widok działania programu}
-%\begin{figure}[h]
-%\centering
-%\includegraphics[scale=0.65]{errorPic.jpg}
-%\caption{Błędne zaimportowanie pliku}
-%\end{figure}
-%
-%\begin{figure}
-%\centering
-%\includegraphics[scale=0.65]{wrongInput.jpg}
-%\caption{Nieprawidłowo wprowadzone dane}
-%\end{figure}
-%\begin{figure}
-%\centering
-%\includegraphics[scale=0.65]{emptyInput.jpg}
-%\caption{Ignorowane puste pole}
-%\end{figure}
-%
-%\begin{figure}
-%\centering
-%\includegraphics[scale=0.65]{duplicate.jpg}
-%\caption{Duplikat}
-%\end{figure}
-%
-%\begin{figure}
-%\centering
-%\includegraphics[scale=0.65]{correctEasyData.jpg}
-%\caption{Przykład opisany w dokumencie}
-%\end{figure}
-%
-%\begin{figure}
-%\centering
-%\includegraphics[scale=0.65]{correctRealData.jpg}
-%\caption{Przykład z rzeczywistymi danymi}
-%\end{figure}
+\begin{figure}[h]
+\centering
+\includegraphics[scale=0.65]{correctData.jpg}
+\caption{Prawidłowo wprowadzone dane}
+\end{figure}
 
-%file:///C:/Users/HP/AppData/Local/Temp/W1_Interpolacja%20wielomianowa.pdf
+\begin{figure}
+\centering
+\includegraphics[scale=0.65]{wrongData.jpg}
+\caption{Nieprawidłowo wprowadzone dane}
+\end{figure}
+
 \end{document}
