@@ -1,4 +1,4 @@
-'use strict';
+'use strict'
 
 const gui = new (class {
   input  = document.getElementById('input')
@@ -6,7 +6,7 @@ const gui = new (class {
   steps  = document.getElementById('steps')
   error  = document.getElementById('error')
 
-  recalculate() {
+  refresh() {
     const precision = this.getPrecision()
     if (0 < precision && precision < 1) {
       const answer = new SecantMethod(precision).calculate()
@@ -17,9 +17,8 @@ const gui = new (class {
     }
   }
 
-  update = debounce(() => this.recalculate(), 1000)
+  update = debounce(() => this.refresh(), 1000)
 
-  getPrecision() {
-    return Number.parseFloat(this.input.value)
-  }
+  getPrecision = () => Number.parseFloat(this.input.value)
+
 })()

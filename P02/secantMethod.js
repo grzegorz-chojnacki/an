@@ -11,7 +11,7 @@ class SecantMethod {
   isGoodEnough = (next, prev) => Math.abs(next - prev) < this.precision
 
   calculate() {
-    const g = (a, b, steps = 0) => {
+    const g = (a, b, steps = 2) => {
       const next = this.getNext(a, b)
       return this.isGoodEnough(next, b)
         ? ({ result: next, steps })
