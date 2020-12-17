@@ -20,7 +20,7 @@ Napisz program, który rozwiązuje równanie: $$4x^{3} + 5x^{2} + 6x - 7 = 0$$\e
 W programie należy wykorzystać metodę siecznych.
 \subsubsection{Opis metody}
  
-Metoda siecznych (interpolacji liniowej) polega na przyjęciu, że funkcja ciągła na dostatecznie małym odcinku w przybliżeniu zmienia się w sposób liniowy. Można wtedy na odcinku $[a,b]$ krzywą $y=f(x)$ zastąpić sieczną. Za przybliżoną wartość pierwiastka przyjmuje się punkt przecięcia siecznej z osią odciętych $OX$. Miejsce przecięcia tej prostej z osią $x$ jest przybliżonym wynikiem szukanego miejsca zerowego, o ile bezwzględna wartość funkcji w tym punkcie jest mniejsza od założonej dokładności.  Metoda ta wymaga ustalenia na przedziale $[a,b]$ dwóch punktów startowych $x_0$ i $x_1$.\\
+Metoda siecznych (interpolacji liniowej) polega na przyjęciu, że funkcja ciągła na dostatecznie małym odcinku w przybliżeniu zmienia się w sposób liniowy. Można wtedy na odcinku $[a,b]$ krzywą $y=f(x)$ zastąpić sieczną. Za przybliżoną wartość pierwiastka przyjmuje się punkt przecięcia siecznej z osią odciętych $OX$. Miejsce przecięcia tej prostej z osią $x$ jest przybliżonym wynikiem szukanego miejsca zerowego, o ile różnica bezwzględna wartości z dwóch ostatnich iteracji jest mniejsza od założonej dokładności.  Metoda ta wymaga ustalenia na przedziale $[a,b]$ dwóch punktów startowych $x_0$ i $x_1$.\\
 Metodę siecznych dla funkcji $f(x)$, mającej pierwiastek w przedziale $[ a , b ]$ można zapisać następującym wzorem rekurencyjnym:
 
  $$x_{k+1}=x_k - \frac{f(x_k)(x_k-x_{k-1})}{f(x_k)-f(x_{k-1})}, k \geq 1$$ i $$x_0=a, x_1=b, $$ gdzie w każdym kroku $ x_{k+1}$ to miejsce zerowe siecznej wykresu $y=f(x)$ w punktach $(x_{k-1},f(x_{k-1}))$ oraz$ (x_{k},f(x_{k})) $, czyli prostej $$y=\frac{f(x_k)-f(x_{k-1})}{x_k-x_{k-1}}(x-x_k)+f(x_k)$$
@@ -31,39 +31,23 @@ $x_0=a, x_1=b$ oraz dokładnością $\epsilon = 0.5.$
 $ x_2=x_1 - \frac{f(x_1)(x_1-x_{0})}{f(x_1)-f(x_{0})}$
 \\ \\
  Mamy $ x_{0}=2,$ i $x_{1}=3, f(x_1)=f(3)=16, f(x_0)=f(2)=-1$ 
-\\Stąd $x_2=3-\frac{16(3-2)}{16-(-1)}=2 \frac{1}{17},f(2 \frac{1}{17})\approx-0.39, |f(x_2)|=0.39 < \epsilon$
-\\Zatem przybliżone rozwiązanie $x_k=2 \frac{1}{17}$ oraz $k=2$
+\\Stąd $x_2=3-\frac{16(3-2)}{16-(-1)}=2 \frac{1}{17}, |x_2 - x_1|=0,94 > \epsilon$
+$f(x_2)=f(2 \frac{1}{17})=-0.39,x_3=2 \frac{1}{17}-\frac{-0.39(-0,94)}{-0.39-16}=2.08, |x_3 - x_2|=0,94 < \epsilon$
+\\Zatem przybliżone rozwiązanie $x_k=2 \frac{1}{17}$ oraz $k=3$!!!!!
 \section{Opis implementacji algorytmu}
 Implementacja realizująca metodę siecznych.
 \subsection{Dane wejściowe}
 Na wejściu program pobiera od użytkownika wartość wyrażającą dokładność rozwiązania(epsilon) $\epsilon \in(0,1).$ 
-\subsection{Struktury danych}
 
-Wyświetlany wielomian $4x^{3} + 5x^{2} + 6x - 7$ to lista współczynników, gdzie poszczególny indeks odpowiada potędze $x$ przy danym współczynniku. Zerowy element obrazuje $ x^{0} $($x$ do potęgi zerowej), pierwszy element odpowiada $ x^{1} $ itd. 
-\begin{description}
- 
- \item[PRZYKŁAD]:\hspace{5 mm}  [4,5,6,-7] oznacza $4x^{3} + 5x^{2} + 6x - 7$.
- \\
-\end{description}
 
-\subsubsection{Punkt}
-DALEJ NALEŻY POPRAWIĆ
-Wykorzystywane są również proste obiekty modelujące punkty. Zawierają tylko 2 pola x i y.
-\subsection{Funkcje pomocnicze}
 
-W programie wykorzystywane są takie funkcje jak:
-\begin{enumerate}
-\item map: transformacja każdego elementu danej listy 
-\item reduce: sprowadzenie listy do pojedynczej wartośći, przy pomocy funkcji działającej na kolejnych elementach danej listy 
-\item filter: filtrowanie danych w liście, spełniających określony warunek
-\end{enumerate}
 \subsection{Przebieg działania}
-Program wyświetla komunikat: 'Wprowadź dokładność rozwiązania $\epsilon \in(0,1)$ '. Jeśli została wprowadzona prawidłowa wartość, to ...
-Próba wprowadzenia nieprawidłowych danych, które weryfikowane są w programie poprzez funkcję ... skutkuje ...
-\par Następnie funkcja \emph{calculate} klasy \emph{SecantMethod} zajmuje się wyliczeniem przybliżonego rozwiązania, a także wyświetleniem wyniku.\\
+Program wyświetla komunikat: 'Wprowadź dokładność rozwiązania $\epsilon \in(0,1)$ '. Jeśli została wprowadzona prawidłowa wartość dokładności, to program poprzez funkcję calculate wylicza przybliżone rozwiązanie i dzięki funkcji refresh wyświetla je wraz z liczbą kroków.
+Próba wprowadzenia nieprawidłowych danych, które weryfikowane są w programie w funkcji 'refresh' skutkuje wyświetleniem stosownego ostrzeżenia.
+\par Następnie funkcja \emph{calculate} klasy \emph{SecantMethod} zajmuje się wyliczeniem przybliżonego rozwiązania.\\
 Funkcja \emph{getNext}, której argumentami są $a$ i $b$ odpowiednio oznaczające $x_{k-1}$ oraz $x_{k}$ zwraca wartość poszczególnego $x_{k+1}$.
 \\
-Funkcja \emph{isGoodEnough} sprawdza czy wartość poszczególnego kroku zwrócona w wyżej wymienionej funkcji 'mieści' się w podanej przez użytkownika dokładności. Jeśli tak, to kończymy przekazując wynik oraz ilość kroków. W przeciwnym wypadku liczone jest kolejne miejsce zerowe tak długo, aż warunek zostanie spełniony.
+Funkcja \emph{isGoodEnough} sprawdza czy różnica  $|x_k - x_{k-1}|$ jest mniejsza od podanej przez użytkownika dokładności. Jeśli tak, to kończymy przekazując wynik oraz ilość kroków. W przeciwnym wypadku liczone jest kolejne przybliżenie tak długo, aż warunek zostanie spełniony.
 
 
 Wynikiem działania programu jest przybliżone rozwiązanie równania: $x_k$ oraz liczba wykonanych kroków: $k$.
