@@ -9,15 +9,17 @@ const gui = new (class {
   refresh() {
     const precision = this.getPrecision()
     if (0 < precision && precision < 1) {
+      this.clearError()
       const answer = new SecantMethod(precision).calculate()
       this.result.innerText = answer.result
       this.steps.innerText  = answer.steps
-    } else {
-      this.error.innerText  = 'Wprowadzona wartość poza przedziałem (0, 1)'
-    }
+    } else this.setError()
   }
 
-  update = debounce(() => this.refresh(), 1000)
+  setError()   { this.error.innerText  = 'Wprowadzona wartość poza przedziałem (0, 1)' }
+  clearError() { this.error.innerText  = '' }
+
+  update = debounce(() => this.refresh(), 10)
 
   getPrecision = () => Number.parseFloat(this.input.value)
 
