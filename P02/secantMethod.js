@@ -2,9 +2,15 @@
 
 class SecantMethod {
   f = x => 4*x**3 + 5*x**2 + 6*x - 7
-  interval = [0, 1]
 
-  constructor(precision) { this.precision = precision }
+  constructor(precision) {
+    this.precision = precision
+    this.interval = this.findInterval()
+  }
+
+  findInterval = (a = 0, b = 1) => this.f(a) * this.f(b) < 0
+    ? [a, b]
+    : this.findInterval(a - (b - a), b + (b - a))
 
   // a = x_{k-1}, b = x_{k}
   getNext = (a, b) => b - (this.f(b) * (b - a)) / (this.f(b) - this.f(a))
