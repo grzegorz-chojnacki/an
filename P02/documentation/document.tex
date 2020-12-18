@@ -4,7 +4,7 @@
 \usepackage[utf8]{inputenc}
 \usepackage{tabto}
 \usepackage{indentfirst} %pierwszy akapit posiada wcięcie
-\usepackage{graphicx} 
+\usepackage{graphicx}
 \title{Równania nieliniowe - projekt}
 \author{Natalia Wojtania i Grzegorz Chojnacki}
 %\date{}
@@ -15,12 +15,12 @@
 \subsection{Tytuł}
 Tytuł zadania to "Przybliżone rozwiązywanie równań nieliniowych".
 \subsection{Treść}
-Napisz program, który rozwiązuje równanie: $$4x^{3} + 5x^{2} + 6x - 7 = 0$$\emph{metodą siecznych.} 
+Napisz program, który rozwiązuje równanie: $$4x^{3} + 5x^{2} + 6x - 7 = 0$$\emph{metodą siecznych.}
 \subsection{Metoda}
 W programie należy wykorzystać metodę siecznych.
 \subsubsection{Opis metody}
- 
-Metoda siecznych (interpolacji liniowej) polega na przyjęciu, że funkcja ciągła na dostatecznie małym odcinku w przybliżeniu zmienia się w sposób liniowy. Można wtedy na odcinku $[a,b]$ krzywą $y=f(x)$ zastąpić sieczną. Za przybliżoną wartość pierwiastka przyjmuje się punkt przecięcia siecznej z osią odciętych $OX$. Miejsce przecięcia tej prostej z osią $x$ jest przybliżonym wynikiem szukanego miejsca zerowego, o ile różnica bezwzględna wartości z dwóch ostatnich iteracji jest mniejsza od założonej dokładności.  Metoda ta wymaga ustalenia na przedziale $[a,b]$ dwóch punktów startowych $x_0$ i $x_1$.\\
+
+Metoda siecznych (interpolacji liniowej) polega na przyjęciu, że funkcja ciągła na dostatecznie małym odcinku w przybliżeniu zmienia się w sposób liniowy. Można wtedy na odcinku $[a,b]$ krzywą $y=f(x)$ zastąpić sieczną. Za przybliżoną wartość pierwiastka przyjmuje się punkt przecięcia siecznej z osią odciętych $OX$. Miejsce prze jest poszerzany.cięcia tej prostej z osią $x$ jest przybliżonym wynikiem szukanego miejsca zerowego, o ile różnica bezwzględna wartości z dwóch ostatnich iteracji jest mniejsza od założonej dokładności.  Metoda ta wymaga ustalenia na przedziale $[a,b]$ dwóch punktów startowych $x_0$ i $x_1$.\\
 Metodę siecznych dla funkcji $f(x)$, mającej pierwiastek w przedziale $[ a , b ]$ można zapisać następującym wzorem rekurencyjnym:
 
  $$x_{k+1}=x_k - \frac{f(x_k)(x_k-x_{k-1})}{f(x_k)-f(x_{k-1})}, k \geq 1$$ i $$x_0=a, x_1=b, $$ gdzie w każdym kroku $ x_{k+1}$ to miejsce zerowe siecznej wykresu $y=f(x)$ w punktach $(x_{k-1},f(x_{k-1}))$ oraz$ (x_{k},f(x_{k})) $, czyli prostej $$y=\frac{f(x_k)-f(x_{k-1})}{x_k-x_{k-1}}(x-x_k)+f(x_k)$$
@@ -30,21 +30,21 @@ $x_0=a, x_1=b$ oraz dokładnością $\epsilon = 0.5.$
 \\ \\
 $ x_2=x_1 - \frac{f(x_1)(x_1-x_{0})}{f(x_1)-f(x_{0})}$
 \\ \\
- Mamy $ x_{0}=2,$ i $x_{1}=3, f(x_1)=f(3)=16, f(x_0)=f(2)=-1$ 
+ Mamy $ x_{0}=2,$ i $x_{1}=3, f(x_1)=f(3)=16, f(x_0)=f(2)=-1$
 \\$x_2=3-\frac{16(3-2)}{16-(-1)}=2 \frac{1}{17}, |x_2 - x_1|\approx 0,94 > \epsilon,$
 $f(x_2)=f(2 \frac{1}{17})\approx-0.39$ $x_3=2 \frac{1}{17}-\frac{-0.39(-0,94)}{-0.39-16}\approx2.08, |x_3 - x_2|\approx 0.02<\epsilon$
 \\Zatem przybliżone rozwiązanie $x_k=2.08$ oraz $k=3$
 \section{Opis implementacji algorytmu}
 Implementacja realizująca metodę siecznych.
 \subsection{Dane wejściowe}
-Na wejściu program pobiera od użytkownika wartość wyrażającą dokładność rozwiązania(epsilon) $\epsilon \in(0,1).$ 
+Na wejściu program pobiera od użytkownika wartość wyrażającą dokładność rozwiązania(epsilon) $\epsilon \in(0,1).$
 
 
 
 \subsection{Przebieg działania}
 Program wyświetla komunikat: 'Wprowadź dokładność rozwiązania $\epsilon \in(0,1)$ '. Jeśli została wprowadzona prawidłowa wartość dokładności, to program poprzez funkcję \emph{calculate} wylicza przybliżone rozwiązanie i dzięki funkcji \emph{refresh} wyświetla je wraz z liczbą kroków.
 Próba wprowadzenia nieprawidłowych danych, które weryfikowane są w programie w funkcji \emph{refresh} skutkuje wyświetleniem stosownego ostrzeżenia.
-\par Następnie funkcja \emph{calculate} klasy \emph{SecantMethod} zajmuje się wyliczeniem przybliżonego rozwiązania.\\
+\par Następnie funkcja \emph{calculate} klasy \emph{SecantMethod} zajmuje się wyliczeniem przybliżonego rozwiązania w oparciu o podaną dokładność i przedział wyszukany za pomocą funkcji \emph{findInterval}. Szukanie przedziału zaczyna się od $[0, 1]$ i jeżeli funkcja nie przechodzi w nim przez oś $OX$, to przedział jest poszerzany.\\
 Funkcja \emph{getNext}, której argumentami są $a$ i $b$ odpowiednio oznaczające $x_{k-1}$ oraz $x_{k}$ zwraca wartość poszczególnego $x_{k+1}$.
 \\
 Funkcja \emph{isGoodEnough} sprawdza czy różnica  $|x_k - x_{k-1}|$ jest mniejsza od podanej przez użytkownika dokładności. Jeśli tak, to kończymy przekazując wynik oraz ilość kroków. W przeciwnym wypadku liczone jest kolejne przybliżenie tak długo, aż warunek zostanie spełniony.
@@ -58,9 +58,15 @@ secantMethod.js
 
 class SecantMethod {
   f = x => 4*x**3 + 5*x**2 + 6*x - 7
-  interval = [0, 1]
 
-  constructor(precision) { this.precision = precision }
+  constructor(precision) {
+    this.precision = precision
+    this.interval = this.findInterval()
+  }
+
+  findInterval = (a = 0, b = 1) => this.f(a) * this.f(b) < 0
+    ? [a, b]
+    : this.findInterval(a - (b - a), b + (b - a))
 
   // a = x_{k-1}, b = x_{k}
   getNext = (a, b) => b - (this.f(b) * (b - a)) / (this.f(b) - this.f(a))
