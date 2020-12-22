@@ -13,14 +13,14 @@
 
 \section{Zadanie}
 \subsection{Tytuł}
-Tytuł zadania to "Przybliżone rozwiązywanie równań nieliniowych".
+Tytuł zadania to ,,Przybliżone rozwiązywanie równań nieliniowych".
 \subsection{Treść}
 Napisz program, który rozwiązuje równanie: $$4x^{3} + 5x^{2} + 6x - 7 = 0$$\emph{metodą siecznych.}
 \subsection{Metoda}
 W programie należy wykorzystać metodę siecznych.
 \subsubsection{Opis metody}
 
-Metoda siecznych (interpolacji liniowej) polega na przyjęciu, że funkcja ciągła na dostatecznie małym odcinku w przybliżeniu zmienia się w sposób liniowy. Można wtedy na odcinku $[a,b]$ krzywą $y=f(x)$ zastąpić sieczną. Za przybliżoną wartość pierwiastka przyjmuje się punkt przecięcia siecznej z osią odciętych $OX$. Miejsce prze jest poszerzany.cięcia tej prostej z osią $x$ jest przybliżonym wynikiem szukanego miejsca zerowego, o ile różnica bezwzględna wartości z dwóch ostatnich iteracji jest mniejsza od założonej dokładności.  Metoda ta wymaga ustalenia na przedziale $[a,b]$ dwóch punktów startowych $x_0$ i $x_1$.\\
+Metoda siecznych (interpolacji liniowej) polega na przyjęciu, że funkcja ciągła na dostatecznie małym odcinku w przybliżeniu zmienia się w sposób liniowy. Można wtedy na odcinku $[a,b]$ krzywą $y=f(x)$ zastąpić sieczną. Za przybliżoną wartość pierwiastka przyjmuje się punkt przecięcia siecznej z osią odciętych $OX$. Miejsce przecięcia tej prostej z osią $X$ jest przybliżonym wynikiem szukanego miejsca zerowego, o ile różnica bezwzględna wartości z dwóch ostatnich iteracji jest mniejsza od założonej dokładności.  Metoda ta wymaga ustalenia na przedziale $[a,b]$ dwóch punktów startowych $x_0$ i $x_1$.\\
 Metodę siecznych dla funkcji $f(x)$, mającej pierwiastek w przedziale $[ a , b ]$ można zapisać następującym wzorem rekurencyjnym:
 
  $$x_{k+1}=x_k - \frac{f(x_k)(x_k-x_{k-1})}{f(x_k)-f(x_{k-1})}, k \geq 1$$ i $$x_0=a, x_1=b, $$ gdzie w każdym kroku $ x_{k+1}$ to miejsce zerowe siecznej wykresu $y=f(x)$ w punktach $(x_{k-1},f(x_{k-1}))$ oraz$ (x_{k},f(x_{k})) $, czyli prostej $$y=\frac{f(x_k)-f(x_{k-1})}{x_k-x_{k-1}}(x-x_k)+f(x_k)$$
@@ -42,7 +42,7 @@ Na wejściu program pobiera od użytkownika wartość wyrażającą dokładnoś�
 
 
 \subsection{Przebieg działania}
-Program wyświetla komunikat: 'Wprowadź dokładność rozwiązania $\epsilon \in(0,1)$ '. Jeśli została wprowadzona prawidłowa wartość dokładności, to program poprzez funkcję \emph{calculate} wylicza przybliżone rozwiązanie i dzięki funkcji \emph{refresh} wyświetla je wraz z liczbą kroków.
+Program wyświetla komunikat: ,,Wprowadź dokładność rozwiązania $\epsilon \in(0,1)$ ". Jeśli została wprowadzona prawidłowa wartość dokładności, to program poprzez funkcję \emph{calculate} wylicza przybliżone rozwiązanie i dzięki funkcji \emph{refresh} wyświetla je wraz z liczbą kroków.
 Próba wprowadzenia nieprawidłowych danych, które weryfikowane są w programie w funkcji \emph{refresh} skutkuje wyświetleniem stosownego ostrzeżenia.
 \par Następnie funkcja \emph{calculate} klasy \emph{SecantMethod} zajmuje się wyliczeniem przybliżonego rozwiązania w oparciu o podaną dokładność i przedział wyszukany za pomocą funkcji \emph{findInterval}. Szukanie przedziału zaczyna się od $[0, 1]$ i jeżeli funkcja nie przechodzi w nim przez oś $OX$, to przedział jest poszerzany.\\
 Funkcja \emph{getNext}, której argumentami są $a$ i $b$ odpowiednio oznaczające $x_{k-1}$ oraz $x_{k}$ zwraca wartość poszczególnego $x_{k+1}$.
