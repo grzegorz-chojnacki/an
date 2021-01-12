@@ -1,0 +1,47 @@
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+main {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+h2.formula {
+  font-family: serif;
+  text-align: center;
+  margin: 0 0 2em;
+}
+
+.sqrt   { border-top: 1px solid }
+section { margin: 1em 0 }
+h2      { margin: 0     }
+
+h3 {
+  font-weight: normal;
+  margin-bottom: 0;
+}
+
+input   {
+  box-sizing: border-box;
+  padding: 0.5em;
+  width: 100%;
+}
+
+
+table   {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+table#output { text-align: left }
+table#output td, table#output th { padding: 0.5em }
+table#output tr:not(:last-child) { border-bottom: 1px solid #0002 }
+
+#error {
+  color: #bb3758;
+  font-size: 1.1rem;
+  font-weight: normal;
+  font-style: italic;
+}

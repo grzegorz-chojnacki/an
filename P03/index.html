@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset='utf-8'>
+  <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+  <title>Metody numeryczne dla zagadnień różniczkowych</title>
+  <meta name='viewport' content='width=device-width, initial-scale=1'>
+  <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>Metody numeryczne dla zagadnień różniczkowych</h1>
+    </header>
+
+    <section>
+      <h3>Zagadnienie różniczkowe:</h3>
+      <h2 class="formula">y'(x) = f(x, y(x)), y(1) = 5</h2>
+      <h3>gdzie:</h3>
+      <h2 class="formula">f(x, y(x)) =
+        &minus;5x<sup>4</sup> &plus; 2
+        &Sqrt;<span class="sqrt">y &plus; x<sup>5</sup> &minus; 5</span>
+        &plus; 5
+      </h2>
+      <h3>Z dokładnym rozwiązaniem:</h3>
+      <h2 class="formula">y(x) =
+        &minus;x<sup>5</sup> &plus; x<sup>2</sup> &plus; 5</h2>
+    </section>
+
+    <section>
+      <h2>Dane wejściowe: <span id="error"></span></h2>
+      <table>
+        <tr>
+          <td><label for="n">
+            Liczba n &ge; 1, określająca podział odcinka [a, b]:
+          </label></td>
+          <td><input id="n" type="number" onkeyup="gui.update()"></td>
+        </tr>
+        <tr>
+          <td><label for="b">
+            Liczba b, informująca o końcu odcinka [a, b]:
+          </label></td>
+          <td><input id="b" type="number" onkeyup="gui.update()"></td>
+        </tr>
+      </table>
+    </section>
+
+    <hr>
+
+    <section>
+      <table id="output">
+        <tr><th>Nazwa metody</th><th>Wynik</th><th>Błąd</th></tr>
+        <tr id="euler">
+          <td>Eulera</td><td class="value"></td><td class="error"></td>
+        </tr>
+        <tr id="eulerModified">
+          <td>Zmodyfikowana Eulera</td><td class="value"></td><td class="error"></td>
+        </tr>
+        <tr id="heun">
+          <td>Heuna</td><td class="value"></td><td class="error"></td>
+        </tr>
+      </table>
+    </section>
+  </main>
+</body>
+  <script src='utils.js'></script>
+  <script src='gui.js'></script>
+  <script src='secantMethod.js'></script>
+</html>
