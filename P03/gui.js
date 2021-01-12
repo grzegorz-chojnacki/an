@@ -12,13 +12,10 @@ const gui = new (class {
 
   refresh() {
     const input = this.getInput()
-    console.log(input)
-
     if (Number.isInteger(input.n) && Number.isFinite(input.b)) {
-      const result = { value: 1.82378, error: 0.4247 }
-      this.setResult(result, this.output.euler)
-      this.setResult(result, this.output.eulerModified)
-      this.setResult(result, this.output.heun)
+      this.setResult(euler(input), this.output.euler)
+      this.setResult(eulerModified(input), this.output.eulerModified)
+      this.setResult(heun(input), this.output.heun)
     }
   }
 
