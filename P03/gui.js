@@ -10,9 +10,16 @@ const gui = new (class {
     heun:          document.getElementById('heun')
   }
 
+  validN = n => Number.isInteger(n) && n >= 1
+  validB = b => Number.isFinite(b)  && b >= 1
+
   refresh() {
     const input = this.getInput()
-    if (Number.isInteger(input.n) && Number.isFinite(input.b)) {
+    if (!this.validN(input.n)) this.setError('Niepaprawna wartość n')
+    if (!this.validB(input.b)) this.setError('Niepaprawna wartość b')
+
+    if (this.validB(input.b) && this.validN(input.n)) {
+      this.clearError()
       this.setResult(euler(input), this.output.euler)
       this.setResult(eulerModified(input), this.output.eulerModified)
       this.setResult(heun(input), this.output.heun)
@@ -20,8 +27,8 @@ const gui = new (class {
   }
 
   setResult = (result, handle) => {
-    handle.getElementsByClassName('value')[0].innerText = result.value
-    handle.getElementsByClassName('error')[0].innerText = result.error
+    handle.getElementsByClassName('value')[0].innerText = result.value.toFixed(2)
+    handle.getElementsByClassName('error')[0].innerText = result.error.toFixed(2)
   }
 
   setError   = e  => this.error.innerText  = e
