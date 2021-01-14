@@ -13,104 +13,195 @@
 
 \section{Zadanie}
 \subsection{Tytuł}
-Tytuł zadania to ,,Metody numeryczne dla zagadnieńróżniczkowych".
+Tytuł zadania to ,,Metody numeryczne dla zagadnień różniczkowych".
 \subsection{Treść}
-Napisz program, który rozwiąże trzema metodami(Eulera, zmodyfikowaną Eulera oraz Heuna)zagadnienie różniczkowe: $$y'(x)= f(x,y(x)), y(1)=5,$$ gdzie $$ f(x,y(x))=-5x^4+2 \sqrt{y+x^5-5}+5.$$
+Napisz program, który rozwiąże trzema metodami (Eulera, zmodyfikowaną Eulera oraz Heuna) zagadnienie różniczkowe: $$y'(x)= f(x,y(x)), y(1)=5,$$ gdzie $$ f(x,y(x))=-5x^4+2 \sqrt{y+x^5-5}+5.$$
 Program ma również obliczyć dokładność dla każdej z tych metod, porównując je z dokładnym rozwiązaniem:$$ y(x)=-x^5+x^2+5.$$
 \subsection{Metody}
 W programie należy wykorzystać metodę Eulera, zmodyfikowaną metodę Eulera oraz metodę Heuna (udoskonaloną metodę Eulera).
 \subsubsection{Opis metod}
-!!!!!
-Metoda siecznych (interpolacji liniowej) polega na przyjęciu, że funkcja ciągła na dostatecznie małym odcinku w przybliżeniu zmienia się w sposób liniowy. Można wtedy na odcinku $[a,b]$ krzywą $y=f(x)$ zastąpić sieczną. Za przybliżoną wartość pierwiastka przyjmuje się punkt przecięcia siecznej z osią odciętych $OX$. Miejsce przecięcia tej prostej z osią $X$ jest przybliżonym wynikiem szukanego miejsca zerowego, o ile różnica bezwzględna wartości z dwóch ostatnich iteracji jest mniejsza od założonej dokładności.  Metoda ta wymaga ustalenia na przedziale $[a,b]$ dwóch punktów startowych $x_0$ i $x_1$.\\
-Metodę siecznych dla funkcji $f(x)$, mającej pierwiastek w przedziale $[ a , b ]$ można zapisać następującym wzorem rekurencyjnym:
+Zagadnienie początkowe:
+$$y'(x)=f(x,y(x)),y(a)=y_0$$
+na przedziale $[a,b]$, gdzie $f: [a,b] \times R \rightarrow R$ jest daną funkcją, a $y_0 \in R$ jest daną liczbą.
+\ Dla ustalonej liczby naturalnej $N \geq 1$ definiujemy $h= \frac{b-a}{N}$ i punkty $x_k=a+kh, 0 \leq k \leq N$ nazywane węzłami równoodległymi.
+\begin{enumerate}
+\item 
+Metoda Eulera 
+\\Jest ona metodą numeryczną do rozwiązywania równań różniczkowych z określoną wartością początkową. Metoda jest pierwszego rzędu co oznacza, że błąd lokalny (błąd na kroku) jest proporcjonalny do kwadratu wielkości kroku, a błąd globalny (błąd w danym czasie) jest proporcjonalny do wielkości kroku.
+ Metoda Eulera często służy jako podstawa do konstruowania bardziej złożonych metod.
 
- $$x_{k+1}=x_k - \frac{f(x_k)(x_k-x_{k-1})}{f(x_k)-f(x_{k-1})}, k \geq 1$$ i $$x_0=a, x_1=b, $$ gdzie w każdym kroku $ x_{k+1}$ to miejsce zerowe siecznej wykresu $y=f(x)$ w punktach $(x_{k-1},f(x_{k-1}))$ oraz$ (x_{k},f(x_{k})) $, czyli prostej $$y=\frac{f(x_k)-f(x_{k-1})}{x_k-x_{k-1}}(x-x_k)+f(x_k)$$
+Z równania różniczkowego $y'(x)=f(x,y(x))$ dla $x=x_k$ 
+\\mamy
+$y'(x_k)=f(x_k,y(x_k)).$
+
+Przybliżając $y'(x_k)$ za pomocą ilorazu różnicowego mamy
+\\ $y'(x_k)\approx\frac{y(x_k+h)-y(x_k)}{h}.$
+
+$$y(x_k+1) \approx y(x_k) +hf(x_k,y(x_k)),$$  ponieważ $x_k+h=x_{k+1}$
+
+$$y_{k+1}=y_k +hf(x_k,y_k), 0 \leq k \leq N-1$$ 
+Punkty $(x_k,y_k), 0 \leq k \leq N$ wyznaczają przybliżone rozwiązanie 
+\\ $y'(x)=f(x,y(x)),y(a)=y_0$.
+\item 
+
+Zmodyfikowana metoda Eulera
+\\
+Metoda ta jest szczególną postacią metody Rungego-Kutty, znana popularnie jako metoda punktu środkowego.
+Należy ona do klasy schematów dwustopniowych.
+Wyrażona jest zależnością rekurencyją:
+
+$$y_{k+1}=y_k +hf(x_k + \frac{h}{2},y_k + \frac{h}{2}f(x_k,y_k)), 0 \leq k \leq N-1$$ 
+\item Metoda Heuna
+\\W metodzie tej zamiast stałej wartości pochodnej obliczonej na początku przedziału, jak to było w metodzie   Eulera,   oblicza   się   pochodną   również   na   końcu   przedziału.   Pierwsze   oszacowanie   wyniku nazywamy predyktorem, a następnie korektorem. Metoda ta, dzięki zabiegowi numerycznemu, daje sporą zmianę w dokładności wyniku i jest znacznie dokładniejsza niż klasyczna metoda Eulera.
+Wspomniany predyktor: 
+$y^{Eu}_{k+1}=y_k +hf(x_k,y_k)$ wyrażamy stosując metodę Eulera.
+$y'=\frac{y_k+y_{k+1}}{2}=\frac{f(x_k,y_k)+f(x_{k+1},y^{Eu}_{k+1})}{2}$ , $y^{Eu}$ liczone zwykłą metodą Eulera.\\
+$y_{k+1}=y_k +\frac{h}{2}(f(x_k,y_k )+f(x_{k+1},y^{Eu}_{k+1}))$ opisuje działanie korektora.
+$$y_{k+1}=y_k +\frac{h}{2}(f(x_k,y_k )+f(x_k+h,y_k+hf(x_k,y_k))), 0 \leq k \leq N-1$$  to tzw. metoda Heuna.
+
+Te trzy metody są metodami jednokrokowymi tzn. do wyznaczenia $y_{k+1}$ potrzebny jest jeden wcześniejszy $y_k$.
+\end{enumerate}
+
+
 \subsubsection{Przykład}
-Dla zagadnienia różniczkowego $y'(x)= f(x,y(x)), y(1)=5,$  na przedziale [1,2] przyjmując $N = 2$ policzyć rozwiązanie trzema metodami oraz obliczyć dokładność dla każdej z metod, wiedząc, że dokładne rozwiązanie to\\ $y(x)=-x^5+x^2+5$ oraz         $f(x,y(x))=-5x^4+2 \sqrt{y+x^5-5}+5.$
 
-
+Dla zagadnienia różniczkowego $y'(x)= f(x,y(x)), y(0)=1$
+na przedziale [0,4] przyjmując krok całkowania $h = 0.5$ wyznaczyć przybliżenie $y_1$ trzema metodami oraz obliczyć błąd  $|y_1-y(x_1)|$ dla każdej z metod na tym kroku, wiedząc, że dokładne rozwiązanie to $y(x)=-\frac{1}{2}x^4+4x^3-10x^2+8.5x$ oraz  $f(x,y(x))=-2x^3+12x^2-20x+8.5 $
+\\
+Rozwiązanie:
+\\$x_0=a=0, x_1=0+0.5=0.5, x_2=1, x_3=1.5,...,x_n=b $
+\\
+$y(0)=1, $
+$y(x_1)=y(0.5)=-\frac{1}{2}(0.5)^4+4(0.5)^3-10(0.5)^2+8.5\cdot0.5=3.21875$
+\\
+\\Metoda Eulera:
+$y_1=y_0+hf(x_0,y_0)$
+\\
+$y_1=1+0.5f(0,1)=1+0.5 \cdot 8.5 =5.25$
+\\
+Błąd: 
+$|5.25-3.21875|=2.03125$
+\\ \\Metoda punktu środkowego:
+$y_1=y_0+hf(x_0+\frac{h}{2},y_0+\frac{h}{2}f(x_0,y_0))$
+\\
+$y_1=1+0.5f(0.25,1+0.25f(0,1))=3.109375$
+\\
+Błąd: 
+$|3.109375-3.21875|=0.109375$
+\\ \\Metoda Heuna:
+$y_1=y_0 +\frac{h}{2}(f(x0,y0 )+f(x_0+h,y_0+hf(x_0,y_0)))$
+\\
+$y_1=1+0.25(f(0,1)+f(0.5,1+hf(0,1))=3.4375$
+\\
+Błąd: 
+$|3.4375-3.21875|=0.21875$
 \section{Opis implementacji algorytmu}
-Implementacja realizująca metody Eulera, zmodyfikowaną Eulara oraz Heuna.
+Implementacja realizująca metodę Eulera, zmodyfikowaną Eulera oraz Heuna.
 \subsection{Dane wejściowe}
 Na wejściu program pobiera od użytkownika liczbę $n$, określająca podział odcinka $[a, b]$ oraz liczbę $b$, informująca o końcu odcinka $[a, b]$.
 
 
 
 \subsection{Przebieg działania}
-!!!
-Program wyświetla komunikat: ,,Wprowadź dokładność rozwiązania $\epsilon \in(0,1)$ ". Jeśli została wprowadzona prawidłowa wartość dokładności, to program poprzez funkcję \emph{calculate} wylicza przybliżone rozwiązanie i dzięki funkcji \emph{refresh} wyświetla je wraz z liczbą kroków.
+Program wyświetla komunikat: ,,Wprowadź dane wejściowe". Jeśli zostały wprowadzone prawidłowe wartości to program poprzez funkcje \emph{euler}, \emph{eulerModified} i \emph{heun} oparte na metodzie \emph{calculate} wylicza przybliżone rozwiązania i dzięki funkcji \emph{refresh} wyświetla je wraz z błędami przybliżenia.
 Próba wprowadzenia nieprawidłowych danych, które weryfikowane są w programie w funkcji \emph{refresh} skutkuje wyświetleniem stosownego ostrzeżenia.
-\par Następnie funkcja \emph{calculate} klasy \emph{SecantMethod} zajmuje się wyliczeniem przybliżonego rozwiązania w oparciu o podaną dokładność i przedział wyszukany za pomocą funkcji \emph{findInterval}. Szukanie przedziału zaczyna się od $[0, 1]$ i jeżeli funkcja nie przechodzi w nim przez oś $OX$, to przedział jest poszerzany.\\
-Funkcja \emph{getNext}, której argumentami są $a$ i $b$ odpowiednio oznaczające $x_{k-1}$ oraz $x_{k}$ zwraca wartość poszczególnego $x_{k+1}$.
+\par Następnie funkcja \emph{calculate}  zajmuje się wyliczeniem węzłów $x_0, x_1, ... ,x_n=b$ oraz przybliżonego rozwiązania w oparciu o podaną liczbę $n$ i przedział wyznaczony przez $a=1$dane w zadaniu oraz $b$ wprowadzone przez użytkownika. 
 \\
-Funkcja \emph{isGoodEnough} sprawdza czy różnica  $|x_k - x_{k-1}|$ jest mniejsza od podanej przez użytkownika dokładności. Jeśli tak, to kończymy przekazując wynik oraz ilość kroków. W przeciwnym wypadku liczone jest kolejne przybliżenie tak długo, aż warunek zostanie spełniony.
+Funkcja \emph{euler} wylicza poszczególne $y_{k+1}$ metodą Eulera.
+I analogicznie funkcja \emph{eulerModified} wylicza poszczególne $y_{k+1}$ zmodyfikowaną metodą Eulera. A funkcja \emph{heun} wylicza poszczególne $y_{k+1}$ metodą Eulera.
 
 
-Wynikiem działania programu jest przybliżone rozwiązanie równania: $x_k$ oraz liczba wykonanych kroków: $k$.
+
+Wynikiem działania programu są przybliżone rozwiązania zagadnienia: $y'(x)= -5x^4+2 \sqrt{y+x^5-5}+5, y(1)=5$  oraz dokładność rozwiązania dla każdej z metod.
 \newpage
 \subsection{Najważniejsze fragmenty programu}
-!!!
-secantMethod.js
+method.js
 \begin{verbatim}
 
-class SecantMethod {
-  f = x => 4*x**3 + 5*x**2 + 6*x - 7
+const a      = 1
+const f      = (x, y) => -5*x**4 + 2*Math.sqrt(y + x**5 - 5) + 5
+const yExact = x => -(x**5) + x**2 + 5
+const step   = (n, b) => (b - a) / n
 
-  constructor(precision) {
-    this.precision = precision
-    this.interval = this.findInterval()
+const calculate = (n, h, next, x = a, y = 5, error = 0) => {
+  for (let k = 0; k < n; k++) {
+    y = next(x, y)
+    x = x + h
+    error = Math.max(Math.abs(y - yExact(x)), error)
   }
-
-  findInterval = (a = 0, b = 1) => this.f(a) * this.f(b) < 0
-    ? [a, b]
-    : this.findInterval(a - (b - a), b + (b - a))
-
-  // a = x_{k-1}, b = x_{k}
-  getNext = (a, b) => b - (this.f(b) * (b - a)) / (this.f(b) - this.f(a))
-  isGoodEnough = (next, prev) => Math.abs(next - prev) < this.precision
-
-  calculate() {
-    const g = (a, b, steps = 2) => {
-      const next = this.getNext(a, b)
-      return this.isGoodEnough(next, b)
-        ? ({ result: next, steps })
-        : g(b, next, steps + 1)
-    }
-    return g(this.interval[0], this.interval[1])
-  }
+  return { value: y, error: error }
 }
+
+const euler = ({n, b}) => {
+  const h = step(n, b)
+  const fn = (x, y) => y + h * f(x, y)
+  return calculate(n, h, fn)
+}
+
+const eulerModified = ({n, b}) => {
+  const h = step(n, b)
+  const fn = (x, y) => y + h * f(x + h/2, y + h/2 * f(x, y))
+  return calculate(n, h, fn)
+}
+
+const heun = ({n, b}) => {
+  const h = step(n, b)
+  const fn = (x, y) => y + h/2 * (f(x, y) + f(x + h, y + h * f(x, y)))
+  return calculate(n, h, fn)
+}
+
 
 \end{verbatim}
 \newpage
 gui.js
+{\footnotesize
+
 \begin{verbatim}
 
-
 const gui = new (class {
-  input  = document.getElementById('input')
-  result = document.getElementById('result')
-  steps  = document.getElementById('steps')
+  input  = { n: document.getElementById('n'), b: document.getElementById('b') }
+  output = document.getElementById('output')
   error  = document.getElementById('error')
-
-  refresh() {
-    const precision = this.getPrecision()
-    if (0 < precision && precision < 1) {
-      this.clearError()
-      const answer = new SecantMethod(precision).calculate()
-      this.result.innerText = answer.result
-      this.steps.innerText  = answer.steps
-    } else this.setError()
+  output = {
+    euler:         document.getElementById('euler'),
+    eulerModified: document.getElementById('eulerModified'),
+    heun:          document.getElementById('heun')
   }
 
-  setError()   { this.error.innerText  = 'Wprowadzona wartość poza przedziałem (0, 1)' }
-  clearError() { this.error.innerText  = '' }
+  validN = n => Number.isInteger(n) && n >= 1
+  validB = b => Number.isFinite(b)  && b >= 1
+
+  refresh() {
+    const input = this.getInput()
+    if (!this.validN(input.n)) this.setError('Niepaprawna wartość n')
+    if (!this.validB(input.b)) this.setError('Niepaprawna wartość b')
+
+    if (this.validB(input.b) && this.validN(input.n)) {
+      this.clearError()
+      this.setResult(euler(input), this.output.euler)
+      this.setResult(eulerModified(input), this.output.eulerModified)
+      this.setResult(heun(input), this.output.heun)
+    }
+  }
+
+  setResult = (result, handle) => {
+    handle.getElementsByClassName('value')[0].innerText = result.value.toFixed(2)
+    handle.getElementsByClassName('error')[0].innerText = result.error.toFixed(2)
+  }
+
+  setError   = e  => this.error.innerText  = e
+  clearError = () => this.error.innerText  = ''
 
   update = debounce(() => this.refresh(), 10)
 
-  getPrecision = () => Number.parseFloat(this.input.value)
-
+  getInput = () => ({
+     n: Number.parseFloat(this.input.n.value),
+     b: Number.parseFloat(this.input.b.value)
+  })
 })()
+
 \end{verbatim}
+}
 \newpage
 \subsection{Widok działania programu}
 \begin{figure}[h]
@@ -122,7 +213,13 @@ const gui = new (class {
 \begin{figure}
 \centering
 \includegraphics[scale=0.65]{wrongData.jpg}
-\caption{Nieprawidłowo wprowadzone dane}
+\caption{Nieprawidłowo wprowadzona wartość n}
+\end{figure}
+
+\begin{figure}
+\centering
+\includegraphics[scale=0.65]{wrongData2.jpg}
+\caption{Nieprawidłowo wprowadzona wartość b}
 \end{figure}
 
 \end{document}
