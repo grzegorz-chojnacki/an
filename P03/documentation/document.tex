@@ -25,24 +25,24 @@ $$y'(x)=f(x,y(x)),y(a)=y_0$$
 na przedziale $[a,b]$, gdzie $f: [a,b] \times R \rightarrow R$ jest daną funkcją, a $y_0 \in R$ jest daną liczbą.
 \ Dla ustalonej liczby naturalnej $N \geq 1$ definiujemy $h= \frac{b-a}{N}$ i punkty $x_k=a+kh, 0 \leq k \leq N$ nazywane węzłami równoodległymi.
 \begin{enumerate}
-\item 
-Metoda Eulera 
+\item
+Metoda Eulera
 \\Jest ona metodą numeryczną do rozwiązywania równań różniczkowych z określoną wartością początkową. Metoda jest pierwszego rzędu co oznacza, że błąd lokalny (błąd na kroku) jest proporcjonalny do kwadratu wielkości kroku, a błąd globalny (błąd w danym czasie) jest proporcjonalny do wielkości kroku.
  Metoda Eulera często służy jako podstawa do konstruowania bardziej złożonych metod.
 
-Z równania różniczkowego $y'(x)=f(x,y(x))$ dla $x=x_k$ 
+Z równania różniczkowego $y'(x)=f(x,y(x))$ dla $x=x_k$
 \\mamy
 $y'(x_k)=f(x_k,y(x_k)).$
 
 Przybliżając $y'(x_k)$ za pomocą ilorazu różnicowego mamy
 \\ $y'(x_k)\approx\frac{y(x_k+h)-y(x_k)}{h}.$
 
-$$y(x_k+1) \approx y(x_k) +hf(x_k,y(x_k)),$$  ponieważ $x_k+h=x_{k+1}$
+$$y(x_{k+1}) \approx y(x_k) +hf(x_k,y(x_k)),$$  ponieważ $x_k+h=x_{k+1}$
 
-$$y_{k+1}=y_k +hf(x_k,y_k), 0 \leq k \leq N-1$$ 
-Punkty $(x_k,y_k), 0 \leq k \leq N$ wyznaczają przybliżone rozwiązanie 
+$$y_{k+1}=y_k +hf(x_k,y_k), 0 \leq k \leq N-1$$
+Punkty $(x_k,y_k), 0 \leq k \leq N$ wyznaczają przybliżone rozwiązanie
 \\ $y'(x)=f(x,y(x)),y(a)=y_0$.
-\item 
+\item
 
 Zmodyfikowana metoda Eulera
 \\
@@ -50,10 +50,10 @@ Metoda ta jest szczególną postacią metody Rungego-Kutty, znana popularnie jak
 Należy ona do klasy schematów dwustopniowych.
 Wyrażona jest zależnością rekurencyją:
 
-$$y_{k+1}=y_k +hf(x_k + \frac{h}{2},y_k + \frac{h}{2}f(x_k,y_k)), 0 \leq k \leq N-1$$ 
+$$y_{k+1}=y_k +hf(x_k + \frac{h}{2},y_k + \frac{h}{2}f(x_k,y_k)), 0 \leq k \leq N-1$$
 \item Metoda Heuna
-\\W metodzie tej zamiast stałej wartości pochodnej obliczonej na początku przedziału, jak to było w metodzie   Eulera,   oblicza   się   pochodną   również   na   końcu   przedziału.   Pierwsze   oszacowanie   wyniku nazywamy predyktorem, a następnie korektorem. Metoda ta, dzięki zabiegowi numerycznemu, daje sporą zmianę w dokładności wyniku i jest znacznie dokładniejsza niż klasyczna metoda Eulera.
-Wspomniany predyktor: 
+\\W metodzie tej zamiast stałej wartości pochodnej obliczonej na początku przedziału, jak to było w metodzie   Eulera,   oblicza   się   pochodną   również   na   końcu   przedziału.   Pierwsze   oszacowanie   wyniku nazywamy predyktorem, a następne korektorem. Metoda ta, dzięki zabiegowi numerycznemu, daje sporą zmianę w dokładności wyniku i jest znacznie dokładniejsza niż klasyczna metoda Eulera.
+Wspomniany predyktor:
 $y^{Eu}_{k+1}=y_k +hf(x_k,y_k)$ wyrażamy stosując metodę Eulera.
 $y'=\frac{y_k+y_{k+1}}{2}=\frac{f(x_k,y_k)+f(x_{k+1},y^{Eu}_{k+1})}{2}$ , $y^{Eu}$ liczone zwykłą metodą Eulera.\\
 $y_{k+1}=y_k +\frac{h}{2}(f(x_k,y_k )+f(x_{k+1},y^{Eu}_{k+1}))$ opisuje działanie korektora.
@@ -79,21 +79,21 @@ $y_1=y_0+hf(x_0,y_0)$
 \\
 $y_1=1+0.5f(0,1)=1+0.5 \cdot 8.5 =5.25$
 \\
-Błąd: 
+Błąd:
 $|5.25-3.21875|=2.03125$
 \\ \\Metoda punktu środkowego:
 $y_1=y_0+hf(x_0+\frac{h}{2},y_0+\frac{h}{2}f(x_0,y_0))$
 \\
 $y_1=1+0.5f(0.25,1+0.25f(0,1))=3.109375$
 \\
-Błąd: 
+Błąd:
 $|3.109375-3.21875|=0.109375$
 \\ \\Metoda Heuna:
 $y_1=y_0 +\frac{h}{2}(f(x0,y0 )+f(x_0+h,y_0+hf(x_0,y_0)))$
 \\
 $y_1=1+0.25(f(0,1)+f(0.5,1+hf(0,1))=3.4375$
 \\
-Błąd: 
+Błąd:
 $|3.4375-3.21875|=0.21875$
 \section{Opis implementacji algorytmu}
 Implementacja realizująca metodę Eulera, zmodyfikowaną Eulera oraz Heuna.
@@ -103,12 +103,11 @@ Na wejściu program pobiera od użytkownika liczbę $n$, określająca podział 
 
 
 \subsection{Przebieg działania}
-Program wyświetla komunikat: ,,Wprowadź dane wejściowe". Jeśli zostały wprowadzone prawidłowe wartości to program poprzez funkcje \emph{euler}, \emph{eulerModified} i \emph{heun} oparte na metodzie \emph{calculate} wylicza przybliżone rozwiązania i dzięki funkcji \emph{refresh} wyświetla je wraz z błędami przybliżenia.
-Próba wprowadzenia nieprawidłowych danych, które weryfikowane są w programie w funkcji \emph{refresh} skutkuje wyświetleniem stosownego ostrzeżenia.
-\par Następnie funkcja \emph{calculate}  zajmuje się wyliczeniem węzłów $x_0, x_1, ... ,x_n=b$ oraz przybliżonego rozwiązania w oparciu o podaną liczbę $n$ i przedział wyznaczony przez $a=1$dane w zadaniu oraz $b$ wprowadzone przez użytkownika. 
+Program wyświetla komunikat: ,,Wprowadź dane wejściowe". Jeśli zostały wprowadzone prawidłowe wartości to program poprzez funkcje \emph{applyMethod}, aplikuje po kolei trzy metody numeryczne do danych wejściowych i wylicza przybliżone rozwiązania. Następnie dzięki funkcji \emph{refresh} wyświetla je wraz z błędami przybliżenia.
+Próba wprowadzenia nieprawidłowych danych, które weryfikowane są przed wykonaniem obliczeń, skutkuje wyświetleniem stosownego ostrzeżenia.
+\par Podczas obliczeń dla każdej metody, funkcja \emph{calculate} wyznacza iteracyjnie węzły $x_0, x_1, ... , x_n = b$, a także przybliżone rozwiązania, w oparciu o podaną liczbę $n$ i przedział $[a, b]$. Na końcu każdej iteracji akumulowany jest także największy błąd danej metody.
 \\
-Funkcja \emph{euler} wylicza poszczególne $y_{k+1}$ metodą Eulera.
-I analogicznie funkcja \emph{eulerModified} wylicza poszczególne $y_{k+1}$ zmodyfikowaną metodą Eulera. A funkcja \emph{heun} wylicza poszczególne $y_{k+1}$ metodą Eulera.
+Funkcja \emph{euler} implementuje metodę Eulera, a funkcje \emph{eulerModified} i \emph{heun} analogicznie implementują odpowiadające im metody.
 
 
 
@@ -117,47 +116,34 @@ Wynikiem działania programu są przybliżone rozwiązania zagadnienia: $y'(x)= 
 \subsection{Najważniejsze fragmenty programu}
 method.js
 \begin{verbatim}
+const f             = (x, y) => -5*x**4 + 2*Math.sqrt(y + x**5 - 5) + 5
+const step          = (n, b) => (b - 1) / n
+const yExact        = x => -(x**5) + x**2 + 5
 
-const a      = 1
-const f      = (x, y) => -5*x**4 + 2*Math.sqrt(y + x**5 - 5) + 5
-const yExact = x => -(x**5) + x**2 + 5
-const step   = (n, b) => (b - a) / n
+// Methods
+const euler         = h => (x, y) => y + h * f(x, y)
+const eulerModified = h => (x, y) => y + h * f(x + h/2, y + h/2 * f(x, y))
+const heun          = h => (x, y) => y + h/2 * (f(x, y) + f(x + h, y + h * f(x, y)))
 
-const calculate = (n, h, next, x = a, y = 5, error = 0) => {
+const applyMethod = (method, {n, b}) => {
+  const h = step(n, b)
+  return calculate(n, h, method(h))
+}
+
+const calculate = (n, h, method, x = 1, y = 5, error = 0) => {
   for (let k = 0; k < n; k++) {
-    y = next(x, y)
+    y = method(x, y)
     x = x + h
     error = Math.max(Math.abs(y - yExact(x)), error)
   }
-  return { value: y, error: error }
+  return { value: y, error }
 }
-
-const euler = ({n, b}) => {
-  const h = step(n, b)
-  const fn = (x, y) => y + h * f(x, y)
-  return calculate(n, h, fn)
-}
-
-const eulerModified = ({n, b}) => {
-  const h = step(n, b)
-  const fn = (x, y) => y + h * f(x + h/2, y + h/2 * f(x, y))
-  return calculate(n, h, fn)
-}
-
-const heun = ({n, b}) => {
-  const h = step(n, b)
-  const fn = (x, y) => y + h/2 * (f(x, y) + f(x + h, y + h * f(x, y)))
-  return calculate(n, h, fn)
-}
-
-
 \end{verbatim}
 \newpage
 gui.js
 {\footnotesize
 
 \begin{verbatim}
-
 const gui = new (class {
   input  = { n: document.getElementById('n'), b: document.getElementById('b') }
   output = document.getElementById('output')
@@ -173,33 +159,33 @@ const gui = new (class {
 
   refresh() {
     const input = this.getInput()
-    if (!this.validN(input.n)) this.setError('Niepaprawna wartość n')
-    if (!this.validB(input.b)) this.setError('Niepaprawna wartość b')
 
-    if (this.validB(input.b) && this.validN(input.n)) {
-      this.clearError()
-      this.setResult(euler(input), this.output.euler)
-      this.setResult(eulerModified(input), this.output.eulerModified)
-      this.setResult(heun(input), this.output.heun)
-    }
+    if (!this.validN(input.n)) return this.setError('Niepoprawna wartość n')
+    if (!this.validB(input.b)) return this.setError('Niepaprawna wartość b')
+
+    this.clearError()
+    this.setResult(applyMethod(euler,         input), this.output.euler)
+    this.setResult(applyMethod(eulerModified, input), this.output.eulerModified)
+    this.setResult(applyMethod(heun,          input), this.output.heun)
   }
 
-  setResult = (result, handle) => {
-    handle.getElementsByClassName('value')[0].innerText = result.value.toFixed(2)
-    handle.getElementsByClassName('error')[0].innerText = result.error.toFixed(2)
+  setResult = ({value, error}, handle) => {
+    if (Number.isNaN(value))
+      return this.setError('Wystąpił błąd podczas obliczeń liczb zmiennoprzecinkowych')
+    handle.getElementsByClassName('value')[0].innerText = value.toFixed(2)
+    handle.getElementsByClassName('error')[0].innerText = error.toFixed(2)
   }
 
-  setError   = e  => this.error.innerText  = e
-  clearError = () => this.error.innerText  = ''
+  setError   = e  => this.error.innerText = e
+  clearError = () => this.error.innerText = ''
 
   update = debounce(() => this.refresh(), 10)
 
   getInput = () => ({
-     n: Number.parseFloat(this.input.n.value),
-     b: Number.parseFloat(this.input.b.value)
+    n: Number.parseFloat(this.input.n.value),
+    b: Number.parseFloat(this.input.b.value)
   })
 })()
-
 \end{verbatim}
 }
 \newpage

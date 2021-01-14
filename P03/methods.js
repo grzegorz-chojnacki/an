@@ -10,7 +10,6 @@ const eulerModified = h => (x, y) => y + h * f(x + h/2, y + h/2 * f(x, y))
 const heun          = h => (x, y) => y + h/2 * (f(x, y) + f(x + h, y + h * f(x, y)))
 
 const applyMethod = (method, {n, b}) => {
-  console.clear()
   const h = step(n, b)
   return calculate(n, h, method(h))
 }
