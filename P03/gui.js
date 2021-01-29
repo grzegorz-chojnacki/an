@@ -2,7 +2,6 @@
 
 const gui = new (class {
   input  = { n: document.getElementById('n'), b: document.getElementById('b') }
-  output = document.getElementById('output')
   error  = document.getElementById('error')
   output = {
     euler:         document.getElementById('euler'),
@@ -17,7 +16,7 @@ const gui = new (class {
     const input = this.getInput()
 
     if (!this.validN(input.n)) return this.setError('Niepoprawna wartość n')
-    if (!this.validB(input.b)) return this.setError('Niepaprawna wartość b')
+    if (!this.validB(input.b)) return this.setError('Niepoprawna wartość b')
 
     this.clearError()
     this.setResult(applyMethod(euler,         input), this.output.euler)
@@ -26,9 +25,8 @@ const gui = new (class {
   }
 
   setResult = ({value, error}, handle) => {
-    if (Number.isNaN(value))
-      return this.setError('Wystąpił błąd podczas obliczeń liczb zmiennoprzecinkowych')
-    handle.getElementsByClassName('value')[0].innerText = value.toFixed(2)
+    console.log(value)
+    handle.getElementsByClassName('value')[0].innerText = value.map(n => n.toFixed(2)).toString()
     handle.getElementsByClassName('error')[0].innerText = error.toFixed(2)
   }
 

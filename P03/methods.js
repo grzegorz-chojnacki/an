@@ -14,11 +14,12 @@ const applyMethod = (method, {n, b}) => {
   return calculate(n, h, method(h))
 }
 
-const calculate = (n, h, method, x = 1, y = 5, error = 0) => {
+const calculate = (n, h, method, x = 1, y = 5, error = 0, acc = []) => {
   for (let k = 0; k < n; k++) {
     y = method(x, y)
+    acc.push(y)
     x = x + h
     error = Math.max(Math.abs(y - yExact(x)), error)
   }
-  return { value: y, error }
+  return { value: acc, error }
 }
